@@ -47,7 +47,7 @@ export default function JoinTeam(props: {
     if (title === "ai/ml") return "aiml";
     else if (title === "ui/ux") return "uiux";
     else if (title === "graphic design") return "graphic";
-    else if (title === "p&m") return "pnm";
+    else if (title === "publicity and marketing") return "pnm";
     else return title;
   };
   const handleClick = (props: { title: string }) => {

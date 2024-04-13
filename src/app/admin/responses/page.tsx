@@ -62,7 +62,6 @@ const StudentResponses: React.FC = () => {
         .find((row) => row.startsWith("adminaccessToken"))
         ?.split("=")[1];
 
-
       const response = await axios.get(
         `https://recruitments-portal-backend.vercel.app/${domain}`,
         {
@@ -112,7 +111,10 @@ const StudentResponses: React.FC = () => {
           <Button onClick={() => fetchData("uiux")} text="UI/UX" />
           <Button onClick={() => fetchData("video")} text="Video" />
           <Button onClick={() => fetchData("graphic")} text="Graphic" />
-          <Button onClick={() => fetchData("pnm")} text="PNM" />
+          <Button
+            onClick={() => fetchData("pnm")}
+            text="Publicity and Marketing"
+          />
           <Button onClick={() => fetchData("editorial")} text="Editorial" />
           <Button onClick={() => fetchData("events")} text="Events" />
         </div>

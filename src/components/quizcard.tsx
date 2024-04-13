@@ -41,18 +41,34 @@ export default function Quizcard(props: {
         // handle the error here
       });
   }
-
+  const setSubDomain = (subDomain: string) => {
+    if (subDomain === "pnm") return "Publicity and Marketing";
+    if (subDomain === "web") return "Web Dev";
+    if (subDomain === "app") return "App Dev";
+    if (subDomain === "graphic") return "Graphic Design";
+    if (subDomain === "research") return "Research";
+    if (subDomain === "events") return "Events";
+    if (subDomain === "video") return "Video Editing";
+    if (subDomain === "devops") return "DevOps";
+    if (subDomain === "uiux") return "UI/UX";
+    if (subDomain === "editorial") return "Editorial";
+    if (subDomain === "aiml") return "AI/ML";
+    return subDomain;
+  };
   return (
     <div className="p-5 md:h-[30vh] md:min-w-[19.5vw] border-[#6117AB] bg-[rgba(82,36,129,0.3)] border-4 mx-5 rounded-2xl flex flex-col my-5 md:my-0">
       <h1 className="font-sarpanch text-white font-bold underline text-xl">
         {props.domain}
       </h1>
       <br></br>
-      <h2 className="font-sarpanch text-white text-xl">{props.subDomain}</h2>
+      <h2 className="font-sarpanch text-white text-xl">
+        {setSubDomain(props.subDomain)}
+      </h2>
       <button
         // Uncomment when quizzes are live
-        onClick={() => {!props.completed ?
-          StartQuiz(props.subDomain): null}}
+        onClick={() => {
+          !props.completed ? StartQuiz(props.subDomain) : null;
+        }}
         className="font-sarpanch bg-[#6117AB] text-white rounded-lg p-2 mt-5"
       >
         {/* {"Quiz will be updated soon"} */}

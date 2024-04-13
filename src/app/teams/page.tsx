@@ -119,7 +119,7 @@ export default function Teams() {
           <JoinTeam
             teamName="Management"
             order="1"
-            titles={["P&M", "Editorial", "Events"]}
+            titles={["Publicity and Marketing", "Editorial", "Events"]}
             selectedDomains={
               data.management?.map((item: any) => item.subdomain) || []
             }
