@@ -82,7 +82,7 @@ export default function Profile() {
 
   return (
     <main className="w-screen h-screen flex items-center justify-center text-white">
-      <section className="mt-16 backdrop-blur-sm w-[85vw] max-w-[85vw] overflow-x-hidden md:w-1/2 h-4/5  border-main-pink border-0 md:border-4 rounded-xl flex flex-col items-center px-10">
+      <section className="mt-16 md:backdrop-blur-sm w-screen max-w-[100vw] overflow-x-hidden md:w-1/2 h-4/5  border-main-pink border-0 md:border-4 rounded-xl flex flex-col items-center px-10">
         <h1 className="text-3xl font-bold text-white font-striger my-5">
           Profile
         </h1>
