@@ -82,7 +82,7 @@ export default function Profile() {
 
   return (
     <main className="w-screen h-screen flex items-center justify-center text-white">
-      <section className="mt-16 backdrop-blur-sm w-[85vw] md:w-1/2 h-4/5  border-main-pink  border-4 rounded-xl flex flex-col items-center px-10">
+      <section className="mt-16 backdrop-blur-sm w-[85vw] max-w-[85vw] overflow-x-hidden md:w-1/2 h-4/5  border-main-pink border-0 md:border-4 rounded-xl flex flex-col items-center px-10">
         <h1 className="text-3xl font-bold text-white font-striger my-5">
           Profile
         </h1>
@@ -93,7 +93,7 @@ export default function Profile() {
             className="rounded-full size-36 my-5"
           />
         </div>
-        <div className="font-sarpanch text-main-pink text-xl md:text-2xl">
+        <div className="font-sarpanch text-main-pink text-lg md:text-2xl">
           <p>
             Email : <span className="text-white">{details.EmailID}</span>
           </p>
