@@ -39,8 +39,8 @@ const Page = () => {
             No questions found
           </h1>
           <div className=" flex justify-center items-center mb-36">
-            <Link href="/dashboard">
-              <Button text="Go to Dashboard" />
+            <Link href="/quizzes">
+              <Button text="Go to Quiz Dashboard" />
             </Link>
           </div>
         </div>

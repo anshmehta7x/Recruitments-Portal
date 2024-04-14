@@ -79,9 +79,9 @@ export default function Nav() {
                     setIsShown={setIsShown}
                   />
                   <HamNavLink
-                    target="/dashboard"
-                    text="Dashboard"
-                    active={pathname === "/dashboard"}
+                    target="/quizzes"
+                    text="Quiz"
+                    active={pathname === "/quizzes"}
                     setIsShown={setIsShown}
                   />
                   <HamNavLink
@@ -140,9 +140,9 @@ export default function Nav() {
           />
           <Navlink target="/faq" text="FAQS" active={pathname === "/faq"} />
           <Navlink
-            target="/dashboard"
-            text="Dashboard"
-            active={pathname === "/dashboard"}
+            target="/quizzes"
+            text="Quiz"
+            active={pathname === "/quizzes"}
           />
           <Link href="https://discord.gg/TzSrx4Hepa" target="_blank">
             <li className="text-white text-2xl mx-5">

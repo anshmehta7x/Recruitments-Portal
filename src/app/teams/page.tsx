@@ -68,7 +68,7 @@ export default function Teams() {
               JSON.parse(localStorage.getItem("domains") || "{}")
             )
           ) {
-            toast.success("Cannot switch domains now.", {
+            toast.success("Cannot switch domains after attempting quiz.", {
               position: "bottom-center",
               autoClose: 5000,
               hideProgressBar: false,
@@ -79,7 +79,7 @@ export default function Teams() {
               theme: "dark",
               transition: Bounce,
             });
-            router.push("/dashboard");
+            router.push("/quizzes");
           }
           setData(JSON.parse(localStorage.getItem("domains") || "{}"));
           setLoading(false);
@@ -88,7 +88,7 @@ export default function Teams() {
           const data = await GetDomains(emailValue, accessToken);
           setData(data);
           if (isAnyTaskCompleted(data)) {
-            toast.success("Cannot switch domains now.", {
+            toast.success("Cannot switch domains after attempting quiz.", {
               position: "bottom-center",
               autoClose: 5000,
               hideProgressBar: false,
@@ -99,7 +99,7 @@ export default function Teams() {
               theme: "dark",
               transition: Bounce,
             });
-            router.push("/dashboard");
+            router.push("/quizzes");
           }
           localStorage.setItem("domains", JSON.stringify(data));
           setLoading(false);
@@ -141,8 +141,8 @@ export default function Teams() {
             }
           />
           <div className=" flex justify-center items-center mb-36">
-            <Link href="/dashboard">
-              <Button text="Go to Dashboard" />
+            <Link href="/quizzes">
+              <Button text="Go to Quiz Dashboard" />
             </Link>
           </div>
           <ScrollIndicator />
