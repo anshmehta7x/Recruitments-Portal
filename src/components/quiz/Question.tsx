@@ -116,7 +116,7 @@ const Question = ({
       .then((_) => {
         setLoading(false);
         localStorage.removeItem("domains");
-        router.push("/dashboard");
+        router.push("/quizzes");
       })
       .catch((error) => {
         throw error;
