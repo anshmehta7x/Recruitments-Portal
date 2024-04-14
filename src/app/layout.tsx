@@ -28,6 +28,7 @@ export default function RootLayout({
     <html lang="en" className={`${sarpanch.variable}`}>
       <head>
         <link rel="shortcut icon" href="/favicon.ico" />
+        <meta property="og:image" content="/logo.svg" />
       </head>
       <body className="bg-main-bg min-h-screen bg-[url('/back-grid-vertical.svg')] md:bg-[url('/back-grid-horizontal.svg')] bg-cover bg-center bg-fixed">
         <AuthProvider>
