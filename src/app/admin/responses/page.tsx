@@ -121,7 +121,7 @@ const StudentResponses: React.FC = () => {
         <div className="overflow-y-auto h-[80vh] max-h-96 w-[35%] bg-gray-100 p-4 rounded-md  mt-[8%] mx-auto">
           <h2 className="text-xl font-bold mb-4 ">Responses</h2>
           <div>
-            {responses.slice(0, 10).map((response, index) => (
+          {responses.map((response, index) => (
               <div key={index} className="mb-2">
                 <button
                   className="text-blue-500"
