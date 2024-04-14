@@ -1,10 +1,10 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "../components/navbar/navbar";
-import {Sarpanch} from "next/font/google";
-import {AuthProvider} from "@/contexts/auth.context";
-import {ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { Sarpanch } from "next/font/google";
+import { AuthProvider } from "@/contexts/auth.context";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "IEEE-CS Enrollments Portal 2024",
@@ -26,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${sarpanch.variable}`}>
+      <head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </head>
       <body className="bg-main-bg min-h-screen bg-[url('/back-grid-vertical.svg')] md:bg-[url('/back-grid-horizontal.svg')] bg-cover bg-center bg-fixed">
         <AuthProvider>
           <Nav />
