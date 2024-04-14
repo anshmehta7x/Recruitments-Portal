@@ -197,12 +197,14 @@ const ResponseDetails = ({ email, onClose, domain }: { email: string; onClose: (
 
   return (
     <div className="fixed w-screen h-screen bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 overflow-auto">
-      <div className="bg-white p-4 rounded-md overflow-y-auto w-full max-w-lg">
-        <button className="absolute top-2 right-2 text-gray-500 hover:text-red-500" onClick={onClose}>
-          X
-        </button>
-        <h2 className="text-xl font-bold mb-4">Response Details</h2>
+      <div className="bg-white p-4 rounded-md overflow-y-auto w-full" style={{ height: "66vh", width : "66vw"}}>
+       
+        <h2 className="text-xl font-bold mb-4">Response Details<button className=" text-gray-500 hover:text-red-500" onClick={onClose}>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Close
+        </button></h2>
+        
         <div>
+        
           {responseDetails
             .filter(response => response.domain === domain)
             .map(response => (
