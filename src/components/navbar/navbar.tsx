@@ -144,7 +144,7 @@ export default function Nav() {
             text="Quiz"
             active={pathname === "/quizzes"}
           />
-          <Link href="https://discord.gg/TzSrx4Hepa" target="_blank">
+          <Link href="https://discord.gg/vR7Q6rDAQB" target="_blank">
             <li className="text-white text-2xl mx-5">
               <img src="/discordlogo.svg" alt="Discord Logo"></img>
             </li>
