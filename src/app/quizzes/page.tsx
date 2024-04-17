@@ -102,8 +102,9 @@ export default function Dashboard() {
 
   return (
     <>
-      <main className="pt-24 md:pt-20 min-h-screen">
-        <section className="md:h-[42vh] w-screen px-5 md:px-20">
+      <main className="pt-24 md:pt-20 min-h-screen flex justify-center items-center text-2xl md;text-3xl text-white">
+        Round 2 updates will be shared soon
+        {/*<section className="md:h-[42vh] w-screen px-5 md:px-20">
           <div className=" h-full w-full flex flex-col justify-center">
             <h1 className="ml-5 text-white text-center md:text-left font-striger text-3xl">
               Pending Quizzes
@@ -193,7 +194,7 @@ export default function Dashboard() {
             </div>
           </div>
         </section>{" "}
-        <Loader visibility={loading}></Loader>
+        <Loader visibility={loading}></Loader> */}
       </main>
     </>
   );
