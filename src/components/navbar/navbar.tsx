@@ -90,7 +90,6 @@ export default function Nav() {
                     active={pathname === "/profile"}
                     setIsShown={setIsShown}
                   />
-
                   <HamNavLinkLogout
                     text={"Logout"}
                     setIsShown={setIsShown}
@@ -144,11 +143,6 @@ export default function Nav() {
             target="/quizzes"
             text="Quiz"
             active={pathname === "/quizzes"}
-          />
-          <Navlink
-            target="/profile"
-            text="Profile"
-            active={pathname === "/profile"}
           />
           <Link href="https://discord.gg/vR7Q6rDAQB" target="_blank">
             <li className="text-white text-2xl mx-5">
