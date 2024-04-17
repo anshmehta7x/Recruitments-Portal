@@ -33,6 +33,7 @@ export default function Teams() {
   }
 
   useEffect(() => {
+    router.push("/quizzes");
     const emailValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith("email"))

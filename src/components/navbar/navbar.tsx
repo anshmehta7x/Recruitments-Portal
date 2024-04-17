@@ -66,12 +66,12 @@ export default function Nav() {
                     active={pathname === "/"}
                     setIsShown={setIsShown}
                   />
-                  <HamNavLink
+                  {/* <HamNavLink
                     target="/teams"
                     text="Teams"
                     active={pathname === "/teams"}
                     setIsShown={setIsShown}
-                  />
+                  /> */}
                   <HamNavLink
                     target="/faq"
                     text="FAQS"
@@ -133,11 +133,11 @@ export default function Nav() {
           } flex-row justify-center items-center font-striger px-4 py-2 bg-main-grey bg-opacity-40 rounded-full`}
         >
           <Navlink target="/" text="Home" active={pathname === "/"} />
-          <Navlink
+          {/* <Navlink
             target="/teams"
             text="Teams"
             active={pathname === "/teams"}
-          />
+          /> */}
           <Navlink target="/faq" text="FAQS" active={pathname === "/faq"} />
           <Navlink
             target="/quizzes"
