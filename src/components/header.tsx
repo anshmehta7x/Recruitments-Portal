@@ -3,7 +3,10 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-export default function Header(props: { title: string }) {
+export default function Header(props: {
+  title: string;
+  classname: string | null;
+}) {
   const Ref = useRef(null);
   const inView = useInView(Ref, { amount: 0.5, once: true });
   const animationOnViewLeft = {
@@ -40,7 +43,7 @@ export default function Header(props: { title: string }) {
   };
   return (
     <motion.div
-      className="flex flex-col justify-evenly text-white font-striger w-max min-w-[350px]"
+      className={`flex flex-col justify-evenly text-white font-striger w-max min-w-[350px] ${props.classname}`}
       ref={Ref}
     >
       <div className="flex flex-row justify-between">
