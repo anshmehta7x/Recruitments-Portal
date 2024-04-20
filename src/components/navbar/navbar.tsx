@@ -49,7 +49,9 @@ export default function Nav() {
     <>
       <nav
         className={`${
-          pathname.startsWith("/admin") ? "hidden" : "flex"
+          pathname.startsWith("/admin") || pathname === "/tasks"
+            ? "hidden"
+            : "flex"
         } flex-row justify-between items-center fixed py-5 w-full z-[31]`}
       >
         {isShown && (

@@ -40,7 +40,7 @@ export default function Header(props: { title: string }) {
   };
   return (
     <motion.div
-      className="flex flex-col justify-evenly text-white font-striger w-max min-w-[350px]"
+      className={`flex flex-col justify-evenly text-white font-striger w-max min-w-[350px] `}
       ref={Ref}
     >
       <div className="flex flex-row justify-between">
