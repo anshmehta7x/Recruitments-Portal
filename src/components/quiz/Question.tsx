@@ -101,7 +101,7 @@ const Question = ({
     setLoading(true);
     axios
       .patch(
-        `https://recruitments-portal-backend.vercel.app/response/submit`,
+        `${process.env.BACKEND_URL}/response/submit`,
         {
           email: emailValue,
           domain: JSON.parse(localStorage.getItem("domain") || "").toString(),
