@@ -6,22 +6,20 @@ import Image from "next/image";
 import TaskDisplay from "@/components/taskdisplay";
 import { redirect, useSearchParams } from "next/navigation";
 import Button from "@/components/button";
-import { useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-interface TasksProps {
-  title: string;
-}
-
-export default function Tasks({ title }: TasksProps) {
+export default function Tasks() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const domain = searchParams.get("domain");
-  if (domain == null) {
-    redirect("/quizzes");
-  }
-  console.log(domain);
-  // check if subdomain part of management domain -> show groupDiscussion
-  // fetch data and authenticate
+  const [domain, setDomain] = useState<any>(null);
+  useEffect(() => {
+    const params = new URLSearchParams(document.location.search);
+    const domain = params.get("domain");
+    if (!domain) {
+      router.push("/quizzes");
+    }
+    setDomain(domain);
+  }, []);
+
   return (
     <div className="w-full h-screen flex flex-col items-center justify-between p-4">
       <button onClick={() => router.back()}>
@@ -36,7 +34,7 @@ export default function Tasks({ title }: TasksProps) {
       <SubHeader title={domain} id="tasks" selected={["string"]} />
       <div className="w-[90vw] h-[60vh] flex flex-col items-center justify-between gap-1">
         {/* <GroupDiscussion /> // for management domains */}
-        <TaskDisplay /> // for individual domains
+        <TaskDisplay />
       </div>
       <Button text="Submit" />
     </div>

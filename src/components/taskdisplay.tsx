@@ -8,11 +8,10 @@ export default function TaskDisplay() {
         <select
           name="level"
           id="level"
+          defaultValue={"easy"}
           className="bg-main-blue text-[#F7AB31]  px-4 rounded-xl text-center absolute top-0 right-[50%] translate-x-[50%] translate-y-[-50%] z-10"
         >
-          <option value="easy" selected>
-            Easy
-          </option>
+          <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
