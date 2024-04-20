@@ -69,7 +69,7 @@ export default function Button(props: { onClick?: Function; text: string }) {
             }}
             whileTap={{scale: 0.9}}
             onClick={() => props.onClick && props.onClick()}
-            className="sm:w-[350px] sm:h-[120px] w-[300px] h-[90px] flex items-center bg-[url('/button-background.svg')] bg-contain bg-center bg-no-repeat relative group hover: hover:cursor-pointer "
+            className="sm:w-[310px] sm:h-[100px] w-[250px] h-[80px] flex items-center bg-[url('/button-background.svg')] bg-contain bg-center bg-no-repeat relative group hover: hover:cursor-pointer "
         >
           <motion.div
               variants={animationOnViewLeft}
