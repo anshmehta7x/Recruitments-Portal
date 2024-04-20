@@ -11,6 +11,7 @@ import { Suspense, useEffect, useState } from "react";
 export default function Tasks() {
   const router = useRouter();
   const [domain, setDomain] = useState<any>(null);
+
   useEffect(() => {
     const params = new URLSearchParams(document.location.search);
     const domain = params.get("domain");
