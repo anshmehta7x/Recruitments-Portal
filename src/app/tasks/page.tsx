@@ -10,6 +10,7 @@ import { Suspense, useEffect, useState } from "react";
 
 export default function Tasks() {
   const router = useRouter();
+
   const [domain, setDomain] = useState<string | null>(null);
 
   useEffect(() => {
