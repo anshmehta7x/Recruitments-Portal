@@ -1,38 +1,44 @@
 "use client";
-import SubHeader from "@/components/subdomain-header";
 import GroupDiscussion from "@/components/gddisplay";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import TaskDisplay from "@/components/taskdisplay";
-import { redirect, useSearchParams } from "next/navigation";
 import Button from "@/components/button";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Loader from "@/components/loader";
 
 export default function Tasks() {
   const router = useRouter();
-
-  const [domain, setDomain] = useState<string | null>(null);
+  const [domain, setDomain] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const params = new URLSearchParams(document.location.search);
-    const domain = params.get("domain");
-    if (!domain) {
-      router.push("/quizzes");
-    } else {
+    const fetchData = async () => {
+      setLoading(true);
+      const params = new URLSearchParams(document.location.search);
+      const domain = params.get("domain");
+      if (!domain) {
+        setLoading(false);
+        router.push("/quizzes");
+        return;
+      }
       setDomain(domain);
-    }
+      setLoading(false);
+    };
+
+    fetchData();
   }, [router]);
 
   const checkDomain = (domain: string | null) => {
     if (!domain) return false;
     const tasks = ["uiux", "web", "app", "graphic", "video", "devops", "aiml"];
     const gd = ["pnm", "events", "editorial"];
-    return tasks.includes(domain)
-      ? true
-      : gd.includes(domain)
-      ? false
-      : router.push("/quizzes");
+    return tasks.includes(domain) ? true : gd.includes(domain) ? false : false;
   };
+
+  if (loading) {
+    return <Loader visibility={loading} />;
+  }
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-between p-4">
@@ -45,7 +51,7 @@ export default function Tasks() {
           className="absolute sm:top-[30px] sm:left-[30px] top-[10px] left-[10px]"
         />
       </button>
-      <div className="flex flex-row items-center justify-center ">
+      <div className="flex flex-row items-center justify-center">
         <div className="w-1/4 h-auto">
           <Image
             src="/graphics/left-lines.svg"
@@ -66,19 +72,21 @@ export default function Tasks() {
           />
         </div>
       </div>
-      <div className="w-[90vw] h-[60vh] flex flex-col items-center justify-between gap-1">
-        {checkDomain(domain) ? <TaskDisplay /> : <GroupDiscussion />}
+      <div className="w-[90vw] h-[70vh] flex flex-col items-center justify-between gap-2">
+        {checkDomain(domain) ? (
+          <TaskDisplay domain={domain} />
+        ) : (
+          <GroupDiscussion />
+        )}
       </div>
-      <div className="sm:m-0 mb-2">
-        <Button text="Submit" />
-      </div>
+
       <button onClick={() => router.push("/faq")}>
         <Image
           src="/know-more.svg"
           alt="logo"
           width={50}
           height={50}
-          className="absolute top-[10px] right-[10px] sm:top-[90vh] sm:right-[70px] "
+          className="absolute top-[10px] right-[10px] sm:top-[90vh] sm:right-[70px]"
         />
       </button>
     </div>
