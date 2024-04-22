@@ -31,8 +31,12 @@ export default function Tasks() {
   const checkDomain = (domain: string | null) => {
     if (!domain) return false;
     const tasks = ["uiux", "web", "app", "graphic", "video", "devops", "aiml"];
-    const gd = ["pnm", "events", "editorial"];
-    return tasks.includes(domain) ? true : gd.includes(domain) ? false : false;
+    const gd = ["pnm", "events"];
+    return tasks.includes(domain)
+      ? true
+      : gd.includes(domain)
+      ? false
+      : router.push("/dashboard");
   };
 
   if (loading) {
