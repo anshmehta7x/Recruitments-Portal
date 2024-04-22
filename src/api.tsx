@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
-import { Bounce, toast } from "react-toastify";
-
+import { ErrorToast } from "./components/toast";
+import { toast, Bounce } from "react-toastify";
 export const PutDomains = async (
   selectedDomains: string[],
   domain: string,
@@ -104,7 +104,7 @@ export const GetTasks = async (domain: string) => {
     ?.split("=")[1];
   try {
     const response = await axios.get(
-      `https://recruitments-portal-backend.vercel.app/round2/tasks/${domain}/${emailValue}`,
+      `${process.env.BACKEND_URL}/round2/tasks/${domain}/${emailValue}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -119,8 +119,7 @@ export const GetTasks = async (domain: string) => {
       throw new Error(`Request failed , ${response.data.message}`);
     }
   } catch (error: Error | any) {
-    alert(`Login Again and Try`);
-    window.location.href = "/quizzes";
+    window.location.href = "/dashboard";
     throw error;
   }
 };
@@ -150,7 +149,7 @@ export const SubmitTask = async ({
     ?.split("=")[1];
   try {
     const response = await axios.put(
-      `https://recruitments-portal-backend.vercel.app/round2/submit`,
+      `${process.env.BACKEND_URL}/round2/submit`,
       {
         email: emailValue,
         domain: domain,
@@ -166,7 +165,6 @@ export const SubmitTask = async ({
       }
     );
     if (response.status === 200) {
-      // const data = response.data[0].questions
       return response;
     } else {
       alert(`${response.data.message}, Login Again and Try Again`);
