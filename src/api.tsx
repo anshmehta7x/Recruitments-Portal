@@ -120,6 +120,7 @@ export const GetTasks = async (domain: string) => {
     }
   } catch (error: Error | any) {
     alert(`Login Again and Try`);
+    window.location.href = "/quizzes";
     throw error;
   }
 };
