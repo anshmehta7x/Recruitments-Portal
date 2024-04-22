@@ -4,6 +4,7 @@ import Taskcard from "@/components/taskcard";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Loader from "@/components/loader";
+import Button from "@/components/button";
 
 export default function Page() {
   type DomainType = {
@@ -57,7 +58,6 @@ export default function Page() {
   }
 
   return (
-
     <>
       <Loader visibility={loading} />
       {domains.length > 0 ? (
@@ -86,10 +86,17 @@ export default function Page() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center w-full min-h-screen pt-[15vh]">
-          <h1 className="text-main-pink">
-            NOT SELECTED IN ANYTHING (temporary)
-          </h1>
+        <div className="flex flex-col justify-evenly items-center w-full min-h-screen pt-[15vh] font-striger text-3xl text-center md:text-5xl">
+          <h1 className="text-main-pink">Welcome to IEEE-CS CORE COMMITTEE</h1>
+          <h2 className="text-white">
+            Join our discord server to stay updated
+          </h2>
+          <Button
+            text="Join Discord"
+            onClick={() => {
+              window.open("https://discord.gg/vR7Q6rDAQB");
+            }}
+          />
         </div>
       )}
     </>
