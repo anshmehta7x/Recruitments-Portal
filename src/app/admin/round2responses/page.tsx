@@ -20,9 +20,9 @@ const Report: React.FC = () => {
         .split("; ")
         .find((row) => row.startsWith("adminaccessToken"))
         ?.split("=")[1];
-        
+
       const noneResponse = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/${domain}/none`,
+        `https://recruitments-portal-backend.vercel.app/admin/round2/none/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -30,7 +30,7 @@ const Report: React.FC = () => {
         }
       );
       const acceptedResponse = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/${domain}/accepted`,
+        `https://recruitments-portal-backend.vercel.app/admin/round2/accepted/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -38,7 +38,7 @@ const Report: React.FC = () => {
         }
       );
       const rejectedResponse = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/${domain}/rejected`,
+        `https://recruitments-portal-backend.vercel.app/admin/round2/rejected/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -74,30 +74,30 @@ const Report: React.FC = () => {
     setSelectedEmail("");
   };
 
-  return  (
+  return (
     <div className="flex justify-between h-screen flex-wrap">
       <Link
-          href="/admin/dashboard"
-          className="absolute left-2 top-3  bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Back
-        </Link>
+        href="/admin/dashboard"
+        className="absolute left-2 top-3  bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Back
+      </Link>
       <div className="flex flex-col items-start mr-10 w-[50%] h-[110vh] flex-wrap mt-[8%]">
-      <Button onClick={() => fetchData("web")} text="Web" />
+        <Button onClick={() => fetchData("web")} text="Web" />
         <Button onClick={() => fetchData("aiml")} text="AIML" />
         <Button onClick={() => fetchData("app")} text="App" />
         <Button onClick={() => fetchData("devops")} text="DevOps" />
-        <Button onClick={() => fetchData("research")} text="Research" />
+        {/* <Button onClick={() => fetchData("research")} text="Research" /> */}
         <Button onClick={() => fetchData("uiux")} text="UI/UX" />
         <Button onClick={() => fetchData("video")} text="Video" />
         <Button onClick={() => fetchData("graphic")} text="Graphic" />
-        <Button onClick={() => fetchData("pnm")} text="Publicity and Marketing" />
-        <Button onClick={() => fetchData("editorial")} text="Editorial" />
+        {/* <Button onClick={() => fetchData("pnm")} text="Publicity and Marketing" /> */}
+        {/* <Button onClick={() => fetchData("editorial")} text="Editorial" /> */}
         <Button onClick={() => fetchData("events")} text="Events" />
       </div>
       <div className="flex flex-col items-center w-[35%] mt-[8%]">
         <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] mr-[10vw] overflow-auto text-center">
-          <h3 className="text-lg font-semibold mb-2">Current Domain : {selectedDomain.toUpperCase()|| "No Domain Selected!"}</h3>
+          <h3 className="text-lg font-semibold mb-2">Current Domain : {selectedDomain.toUpperCase() || "No Domain Selected!"}</h3>
         </div>
         <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] mr-[10vw] overflow-auto">
           <h2 className="text-xl font-bold mb-2">None (to be decided) - {noneToBeDecided.length} responses </h2>
