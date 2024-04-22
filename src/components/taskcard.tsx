@@ -33,7 +33,7 @@ export default function Taskcard(props: {
   return (
     <Link
       href={
-        props.completed
+        false
           ? ""
           : {
               pathname: "/tasks",
