@@ -57,6 +57,7 @@ export default function Page() {
   }
 
   return (
+
     <>
       <Loader visibility={loading} />
       {domains.length > 0 ? (
