@@ -23,7 +23,9 @@ export default function Quizcard(props: {
 
     axios
       .post(
-        `https://recruitments-portal-backend.vercel.app/question/${subDomain.toLowerCase()}/${emailValue}`,
+        `${
+          process.env.BACKEND_URL
+        }/question/${subDomain.toLowerCase()}/${emailValue}`,
         {},
         {
           headers: {

@@ -53,7 +53,7 @@ export default function Dashboard() {
     setLoading(true);
     axios
       .get<ResponseData>(
-        `https://recruitments-portal-backend.vercel.app/get_domains/${emailValue}`,
+        `${process.env.BACKEND_URL}/get_domains/${emailValue}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

@@ -12,7 +12,7 @@ export default function Page() {
       <section className="flex flex-col w-full px-[5vw] md:mb-5">
         <h1 className="font-striger text-4xl text-white">Tasks</h1>
       </section>
-      <div className="flex items-center justify-center w-full border-2 border-red-500 px-8">
+      <div className="flex items-center justify-center w-full  px-8">
         <section className="flex flex-col md:grid md:grid-cols-3 md:gap-8 w-full my-2 pb-2">
           <Taskcard
             domain="Publicity and Marketing"

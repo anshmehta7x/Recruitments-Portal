@@ -1,3 +1,6 @@
+"use client";
+import Link from "next/link";
+
 export default function Taskcard(props: {
   domain: string;
   subDomain: string;
@@ -28,26 +31,39 @@ export default function Taskcard(props: {
     return subDomain;
   };
   return (
-    <div className="py-3 px-5 h-[20vh] md:h-[25vh] md:w-[25vw] border-[#6117AB] bg-[rgba(82,36,129,0.3)] border-4 mx-3 rounded-2xl flex flex-col justify-between my-5 md:my-0">
-      <div>
-        <h1 className="font-sarpanch text-white font-bold underline text-xl">
-          {props.domain}
-        </h1>
-        <br></br>
-        <h2 className="font-sarpanch text-white text-xl">
-          {setSubDomain(props.subDomain)}
-        </h2>
+    <Link
+      href={
+        props.completed
+          ? ""
+          : {
+              pathname: "/tasks",
+              query: {
+                domain: props.subDomain,
+              },
+            }
+      }
+    >
+      <div className="py-3 px-5 h-[20vh] md:h-[25vh] md:w-[25vw] border-[#6117AB] bg-[rgba(82,36,129,0.3)] border-4 mx-3 rounded-2xl flex flex-col justify-between my-5 md:my-0">
+        <div>
+          <h1 className="font-sarpanch text-white font-bold underline text-xl">
+            {props.domain}
+          </h1>
+          <br></br>
+          <h2 className="font-sarpanch text-white text-xl">
+            {setSubDomain(props.subDomain)}
+          </h2>
+        </div>
+        <label
+          // Uncomment when quizzes are live
+          className={`${
+            props.completed ? "text-main-pink" : "text-white"
+          } font-sarpanch bg-[#6117AB] w-[25vw] text-center md:w-[10vw] rounded-lg p-2 self-end`}
+        >
+          {/* {"Quiz will be updated soon"} */}
+          {/*// Uncomment when quizzes are live*/}
+          {!props.completed ? "Pending" : "Completed"}
+        </label>
       </div>
-      <label
-        // Uncomment when quizzes are live
-        className={`${
-          props.completed ? "text-main-pink" : "text-white"
-        } font-sarpanch bg-[#6117AB] w-[25vw] text-center md:w-[10vw] rounded-lg p-2 self-end`}
-      >
-        {/* {"Quiz will be updated soon"} */}
-        {/*// Uncomment when quizzes are live*/}
-        {!props.completed ? "Pending" : "Completed"}
-      </label>
-    </div>
+    </Link>
   );
 }

@@ -10,7 +10,9 @@ export const PutDomains = async (
 ) => {
   try {
     const response = await axios.put(
-      `https://recruitments-portal-backend.vercel.app/put_domains/${domain.toLocaleLowerCase()}/${emailValue}`,
+      `${
+        process.env.BACKEND_URL
+      }/put_domains/${domain.toLocaleLowerCase()}/${emailValue}`,
       {
         [domain.toLocaleLowerCase()]: selectedDomains,
       },
@@ -74,7 +76,7 @@ export const PutDomains = async (
 export const GetDomains = async (emailValue: string, accessToken: string) => {
   try {
     const response = await axios.get(
-      `https://recruitments-portal-backend.vercel.app/get_domains/${emailValue}`,
+      `${process.env.BACKEND_URL}/get_domains/${emailValue}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
