@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function GroupDiscussion(props) {
+export default function GroupDiscussion(props: { domain: string }) {
   const emailValue = document.cookie
     .split("; ")
     .find((row) => row.startsWith("email"))
