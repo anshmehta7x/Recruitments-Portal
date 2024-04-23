@@ -78,7 +78,7 @@ export default function Tasks() {
         {checkDomain(domain) ? (
           <TaskDisplay domain={domain} />
         ) : (
-          <GroupDiscussion />
+          <GroupDiscussion domain={domain} />
         )}
       </div>
 
