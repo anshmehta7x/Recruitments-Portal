@@ -6,7 +6,7 @@ export default function Page() {
       <section className="flex flex-col font-striger text-center text-2xl md:text-4xl mb-[5vh]">
         <h1 className="text-main-pink">Congratulations!</h1>
         <h1 className="text-white">
-          you've been selected in the following domains
+          youve been selected in the following domains
         </h1>
       </section>
       <section className="flex flex-col w-full px-[5vw] md:mb-5">

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 interface Response {
     _id: {
@@ -78,6 +79,12 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center pt-[5vw]">
+            <Link
+          href="/admin/dashboard"
+          className="absolute left-2 top-3  bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Back
+        </Link>
             <div className="mb-4 w-[50vw]">
                 <input
                     type="text"
