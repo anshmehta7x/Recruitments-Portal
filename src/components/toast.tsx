@@ -21,8 +21,7 @@ export default function SuccessToast(
     transition: Bounce,
   };
 
-  toast.success(message, { ...defaultOptions, ...options });
-  return null;
+  return toast.success(message, { ...defaultOptions, ...options });
 }
 
 export function ErrorToast(

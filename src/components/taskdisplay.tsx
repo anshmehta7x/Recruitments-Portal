@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import EmblaCarousel from "@/components/taskCarousel/taskcarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import { GetTasks, SubmitTask } from "@/api";
+import EmblaCarousel from "./taskCarousel/taskcarousel";
 import Button from "./button";
+import SuccessToast, { ErrorToast } from "../components/toast";
 import { answerFormat } from "@/api";
 import { connectStorageEmulator } from "firebase/storage";
 import { Bounce, toast } from "react-toastify";
@@ -57,12 +58,10 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   };
 
   const submitTasks = async () => {
-    console.log({
-      ...input,
-      question: question,
-      domain: domain,
-      difficulty: difficulty,
-    });
+    if (input.link1 === "") {
+      ErrorToast({ message: "Please add atleast one link" });
+      return;
+    }
     const response = await SubmitTask({
       ...input,
       question: question,
@@ -97,6 +96,7 @@ export default function TaskDisplay({ domain }: { domain: string }) {
         transition: Bounce,
       });
     }
+
   };
 
   const OPTIONS: EmblaOptionsType = {};

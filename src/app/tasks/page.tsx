@@ -23,8 +23,7 @@ export default function Tasks() {
       }
       setDomain(domain);
       setLoading(false);
-    };
-
+    };  
     fetchData();
   }, [router]);
 
