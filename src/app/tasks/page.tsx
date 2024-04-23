@@ -23,14 +23,14 @@ export default function Tasks() {
       }
       setDomain(domain);
       setLoading(false);
-    };  
+    };
     fetchData();
   }, [router]);
 
   const checkDomain = (domain: string | null) => {
     if (!domain) return false;
     const tasks = ["uiux", "web", "app", "graphic", "video", "devops", "aiml"];
-    const gd = ["pnm", "events"];
+    const gd = ["events"];
     return tasks.includes(domain)
       ? true
       : gd.includes(domain)
