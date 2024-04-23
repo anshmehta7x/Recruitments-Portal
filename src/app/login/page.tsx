@@ -43,7 +43,7 @@ export default function Login() {
 
   function verifyEmailinDB(user: User) {
     axios
-      .post("https://recruitments-portal-backend.vercel.app/admin/check-user", {
+      .post(`${process.env.BACKEND_URL}/admin/check-user`, {
         email: user.email,
       })
       .then((response) => {
@@ -79,7 +79,7 @@ export default function Login() {
       });
 
     axios
-      .post("https://recruitments-portal-backend.vercel.app/check_user", {
+      .post(`${process.env.BACKEND_URL}/check_user`, {
         email: user.email,
       })
       .then((response) => {

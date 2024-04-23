@@ -62,7 +62,7 @@ const StudentResponses: React.FC = () => {
         ?.split("=")[1];
 
       const response = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/${domain}/none`,
+        `${process.env.BACKEND_URL}/${domain}/none`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -97,12 +97,16 @@ const StudentResponses: React.FC = () => {
   };
   return (
     <>
-      <Link
-          href="/admin/dashboard"
-          className="absolute left-2 top-3  bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Back
-        </Link>
+
+      <button
+        className="text-white border-2 border-white top-5 left-5 fixed p-5"
+        onClick={() => {
+          window.location.href = "/admin/dashboard";
+        }}
+      >
+        Back
+      </button>
+
       <div className="flex justify-between h-screen flex-wrap">
         <div className="flex flex-col items-start mr-10 w-[50%] h-[110vh] flex-wrap mt-[8%]">
           <Button onClick={() => fetchData("web")} text="Web" />
@@ -120,14 +124,19 @@ const StudentResponses: React.FC = () => {
           <Button onClick={() => fetchData("editorial")} text="Editorial" />
           <Button onClick={() => fetchData("events")} text="Events" />
         </div>
-        
+
         <div className="overflow-y-auto h-[90vh] max-h-[33rem] w-[35%] bg-gray-100 p-4 rounded-md  mt-[8%] mx-auto">
-        <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] overflow-auto text-center">
-          <h3 className="text-lg font-semibold mb-2">Current Domain : {selectedDomain.toUpperCase()|| "No Domain Selected!"}</h3>
-        </div>
-          <h2 className="text-xl font-bold mb-4 ">Responses - {responses.length}</h2>
+          <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] overflow-auto text-center">
+            <h3 className="text-lg font-semibold mb-2">
+              Current Domain :{" "}
+              {selectedDomain.toUpperCase() || "No Domain Selected!"}
+            </h3>
+          </div>
+          <h2 className="text-xl font-bold mb-4 ">
+            Responses - {responses.length}
+          </h2>
           <div>
-          {responses.map((response, index) => (
+            {responses.map((response, index) => (
               <div key={index} className="mb-2">
                 <button
                   className="text-blue-500"

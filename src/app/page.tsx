@@ -62,8 +62,8 @@ export default function Home() {
           </div>
           <div className="snap-center h-[50vh] flex items-center justify-center">
             <Button
-              text={"Choose Domains"}
-              onClick={() => router.push("/teams")}
+              text={"Check Round 1 Results"}
+              onClick={() => router.push("/dashboard")}
             />
           </div>
         </Suspense>

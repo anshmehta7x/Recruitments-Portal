@@ -44,7 +44,7 @@ export default function Profile() {
     try {
       setLoading(true);
       const response = await axios.get<Response[]>(
-        `https://recruitments-portal-backend.vercel.app/profile/${emailValue}`,
+        `${process.env.BACKEND_URL}/profile/${emailValue}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import EmblaCarousel from "@/components/taskCarousel/taskcarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import { GetTasks, SubmitTask } from "@/api";
+import EmblaCarousel from "./taskCarousel/taskcarousel";
 import Button from "./button";
+import SuccessToast, { ErrorToast } from "../components/toast";
 import { answerFormat } from "@/api";
+import { connectStorageEmulator } from "firebase/storage";
+import { Bounce, toast } from "react-toastify";
 
 interface questions {
   easy: string[];
@@ -55,20 +58,43 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   };
 
   const submitTasks = async () => {
-    console.log({
-      ...input,
-      question: question,
-      domain: domain,
-      difficulty: difficulty,
-    });
+    if (input.link1 === "" && input.link2 === "") {
+      ErrorToast({ message: "Please add atleast one link" });
+      return;
+    }
     const response = await SubmitTask({
       ...input,
       question: question,
       domain: domain,
       difficulty: difficulty,
     });
-    if (response) alert("Task Submitted Successfully");
-    else alert("Task Submission Failed");
+    if (response) {
+      console.log(response);
+      toast.success("Submitted Task.", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setInput({ ...input, link1: "", link2: "" });
+    } else {
+      toast.error("Error in submitting task", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
   };
 
   const OPTIONS: EmblaOptionsType = {};
