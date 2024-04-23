@@ -44,7 +44,6 @@ export default function GroupDiscussion(props: any) {
       <p className="font-striger sm:text-3xl text-lg text-main-pink">
         Group Discussion Schedule
       </p>
-      <p>Team No. {teamNum}</p>
       <p>Date : {date}</p>
       <p>Time : {time}</p>
       <p>

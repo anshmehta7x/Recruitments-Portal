@@ -1,17 +1,19 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const BackendUrl = "https://recruitments-portal-backend.vercel.app";
+const BackendUrl = `${process.env.BACKEND_URL}`;
 
 interface SeniorCoreEmail {
   email: string;
 }
 
 const SeniorCoreList: React.FC = () => {
-  const [seniorCoreEmails, setSeniorCoreEmails] = useState<SeniorCoreEmail[]>([]);
-  const [newEmail, setNewEmail] = useState<string>('');
-  const [emailToRemove, setEmailToRemove] = useState<string>('');
+  const [seniorCoreEmails, setSeniorCoreEmails] = useState<SeniorCoreEmail[]>(
+    []
+  );
+  const [newEmail, setNewEmail] = useState<string>("");
+  const [emailToRemove, setEmailToRemove] = useState<string>("");
 
   useEffect(() => {
     fetchSeniorCoreList();
@@ -20,59 +22,76 @@ const SeniorCoreList: React.FC = () => {
   const fetchSeniorCoreList = async () => {
     try {
       const accessToken = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('adminaccessToken'))
-        ?.split('=')[1];
+        .split("; ")
+        .find((row) => row.startsWith("adminaccessToken"))
+        ?.split("=")[1];
 
-      const response = await axios.get<SeniorCoreEmail[]>(`${BackendUrl}/admin/senior-core`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await axios.get<SeniorCoreEmail[]>(
+        `${BackendUrl}/admin/senior-core`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       setSeniorCoreEmails(response.data);
     } catch (error) {
-      console.error('Error fetching senior core list:', error);
+      console.error("Error fetching senior core list:", error);
     }
   };
 
   const handleAddEmail = async () => {
-    if (newEmail && !seniorCoreEmails.some((email) => email.email === newEmail)) {
+    if (
+      newEmail &&
+      !seniorCoreEmails.some((email) => email.email === newEmail)
+    ) {
       try {
         const accessToken = document.cookie
-          .split('; ')
-          .find((row) => row.startsWith('adminaccessToken'))
-          ?.split('=')[1];
+          .split("; ")
+          .find((row) => row.startsWith("adminaccessToken"))
+          ?.split("=")[1];
 
-        await axios.post(`${BackendUrl}/admin/senior-core/add`, { email: newEmail }, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        setNewEmail('');
+        await axios.post(
+          `${BackendUrl}/admin/senior-core/add`,
+          { email: newEmail },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setNewEmail("");
         fetchSeniorCoreList(); // Refresh the senior core list
       } catch (error) {
-        console.error('Error adding senior core email:', error);
+        console.error("Error adding senior core email:", error);
       }
     }
   };
 
   const handleRemoveEmail = async () => {
-    if (emailToRemove && seniorCoreEmails.some((email) => email.email === emailToRemove)) {
+    if (
+      emailToRemove &&
+      seniorCoreEmails.some((email) => email.email === emailToRemove)
+    ) {
       try {
         const accessToken = document.cookie
-          .split('; ')
-          .find((row) => row.startsWith('adminaccessToken'))
-          ?.split('=')[1];
+          .split("; ")
+          .find((row) => row.startsWith("adminaccessToken"))
+          ?.split("=")[1];
 
-        await axios.post(`${BackendUrl}/admin/senior-core/remove`, { email: emailToRemove }, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        setEmailToRemove('');
+        await axios.post(
+          `${BackendUrl}/admin/senior-core/remove`,
+          { email: emailToRemove },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setEmailToRemove("");
         fetchSeniorCoreList(); // Refresh the senior core list
       } catch (error) {
-        console.error('Error removing senior core email:', error);
+        console.error("Error removing senior core email:", error);
       }
     }
   };
@@ -83,13 +102,17 @@ const SeniorCoreList: React.FC = () => {
         <h2 className="text-xl font-bold mb-4">Senior Core Emails</h2>
         <ul className="list-disc list-inside">
           {seniorCoreEmails.map((email, index) => (
-            <li key={index} className="mb-2">{email.email}</li>
+            <li key={index} className="mb-2">
+              {email.email}
+            </li>
           ))}
         </ul>
       </div>
       <div className="bg-white p-8 rounded-md mr-8 w-1/3">
         <div className="mb-4">
-          <h3 className="text-lg font-semibold mb-2">Add Email to Senior Core</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            Add Email to Senior Core
+          </h3>
           <div className="flex">
             <input
               type="email"
@@ -107,7 +130,9 @@ const SeniorCoreList: React.FC = () => {
           </div>
         </div>
         <div>
-          <h3 className="text-lg font-semibold mb-2">Remove Email from Senior Core</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            Remove Email from Senior Core
+          </h3>
           <div className="flex">
             <input
               type="email"

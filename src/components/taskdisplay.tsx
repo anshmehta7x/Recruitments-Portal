@@ -40,7 +40,7 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   }, []);
 
   const getSlides = () => {
-    if (!tasks) return ["No tasks found, Kindly refersh the page."];
+    if (!tasks) return ["No tasks found, try refreshing the page."];
     switch (difficulty) {
       case "easy":
         return tasks["easy"];
@@ -69,7 +69,6 @@ export default function TaskDisplay({ domain }: { domain: string }) {
       difficulty: difficulty,
     });
     if (response) {
-      console.log(response);
       toast.success("Submitted Task.", {
         position: "bottom-center",
         autoClose: 5000,
