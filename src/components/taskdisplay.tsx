@@ -4,6 +4,8 @@ import { EmblaOptionsType } from "embla-carousel";
 import { GetTasks, SubmitTask } from "@/api";
 import Button from "./button";
 import { answerFormat } from "@/api";
+import { connectStorageEmulator } from "firebase/storage";
+import { Bounce, toast } from "react-toastify";
 
 interface questions {
   easy: string[];
@@ -67,8 +69,34 @@ export default function TaskDisplay({ domain }: { domain: string }) {
       domain: domain,
       difficulty: difficulty,
     });
-    if (response) alert("Task Submitted Successfully");
-    else alert("Task Submission Failed");
+    if (response) {
+      //clear inputs
+      console.log(response);
+      toast.success("Submitted Task.", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setInput({ ...input, link1: "", link2: "" });
+    } else {
+      toast.error("Error in submitting task", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
   };
 
   const OPTIONS: EmblaOptionsType = {};

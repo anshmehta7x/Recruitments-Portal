@@ -61,7 +61,7 @@ export default function Taskcard(props: {
         >
           {/* {"Quiz will be updated soon"} */}
           {/*// Uncomment when quizzes are live*/}
-          {!props.completed ? "Pending" : "Completed"}
+          {!props.completed ? "Pending" : "Edit"}
         </label>
       </div>
     </Link>
