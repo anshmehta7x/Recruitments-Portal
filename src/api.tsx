@@ -90,3 +90,87 @@ export const GetDomains = async (emailValue: string, accessToken: string) => {
     throw error;
   }
 };
+
+export const GetTasks = async (domain: string) => {
+  const emailValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("email"))
+    ?.split("=")[1];
+  const accessToken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("accessToken"))
+    ?.split("=")[1];
+  try {
+    const response = await axios.get(
+      `https://recruitments-portal-backend.vercel.app/round2/tasks/${domain}/${emailValue}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      // const data = response.data[0].questions
+      return response.data[0].questions;
+    } else {
+      alert(`${response.data.message}, Login Again and Try Again`);
+      throw new Error(`Request failed , ${response.data.message}`);
+    }
+  } catch (error: Error | any) {
+    alert(`Login Again and Try`);
+    throw error;
+  }
+};
+
+export interface answerFormat {
+  domain: string;
+  question: string;
+  difficulty: string;
+  link1: string;
+  link2: string;
+}
+
+export const SubmitTask = async ({
+  domain,
+  question,
+  difficulty,
+  link1,
+  link2,
+}: answerFormat) => {
+  const emailValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("email"))
+    ?.split("=")[1];
+  const accessToken = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("accessToken"))
+    ?.split("=")[1];
+  try {
+    const response = await axios.put(
+      `https://recruitments-portal-backend.vercel.app/round2/submit`,
+      {
+        email: emailValue,
+        domain: domain,
+        question: question,
+        difficulty: difficulty,
+        link1: link1,
+        link2: link2,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      // const data = response.data[0].questions
+      return response;
+    } else {
+      alert(`${response.data.message}, Login Again and Try Again`);
+      throw new Error(`Request failed , ${response.data.message}`);
+    }
+  } catch (error: Error | any) {
+    alert(`Login Again and Try Again`);
+    throw error;
+  }
+};
