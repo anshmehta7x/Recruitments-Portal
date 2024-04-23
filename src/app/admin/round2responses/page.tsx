@@ -91,8 +91,8 @@ const Report: React.FC = () => {
         <Button onClick={() => fetchData("uiux")} text="UI/UX" />
         <Button onClick={() => fetchData("video")} text="Video" />
         <Button onClick={() => fetchData("graphic")} text="Graphic" />
-        {/* <Button onClick={() => fetchData("pnm")} text="Publicity and Marketing" /> */}
-        {/* <Button onClick={() => fetchData("editorial")} text="Editorial" /> */}
+        <Button onClick={() => fetchData("pnm")} text="Publicity and Marketing" />
+        <Button onClick={() => fetchData("editorial")} text="Editorial" />
         <Button onClick={() => fetchData("events")} text="Events" />
       </div>
       <div className="flex flex-col items-center w-[35%] mt-[8%]">

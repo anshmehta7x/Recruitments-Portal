@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Bounce, toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 interface Team {
   domain: string;
@@ -12,28 +13,60 @@ interface Team {
   teamMembers: string[];
   supervisors: string[];
 }
-
+const BackendUrl = 'https://recruitments-portal-backend.vercel.app';
 const TeamDetails = () => {
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<string[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
   const [meetingLink, setMeetingLink] = useState('');
 
+  const domain = 'events';
+
   useEffect(() => {
+
     fetchTeamNames();
   }, []);
 
   const fetchTeamNames = async () => {
     try {
-      const response = await axios.get<Team[]>('/api/teams');
+      const userEmail = document.cookie.split('; ')
+        .find((row) => row.startsWith('email'))
+        ?.split('=')[1];
+      const sctoken = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('scaccessToken'))
+        ?.split('=')[1];
+      const domain = 'events';
+      const response = await axios.get(`${BackendUrl}/seniorcore/group-discussion/${domain}/${userEmail}`, {
+        headers: {
+          Authorization: `Bearer ${sctoken}`,
+        },
+      });
       setTeams(response.data);
     } catch (error) {
       console.error('Error fetching team names:', error);
     }
   };
 
-  const handleTeamSelect = (team: Team) => {
-    setSelectedTeam(team);
-    setMeetingLink(team.meetLink);
+  const handleTeamSelect = async (teamName: string) => {
+    try {
+      const sctoken = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith('scaccessToken'))
+        ?.split('=')[1];
+      const response = await axios.get(`${BackendUrl}/seniorcore/teamDetails/${teamName}/${domain}`, {
+        headers: {
+          Authorization: `Bearer ${sctoken}`,
+        },
+      });
+      setSelectedTeam(response.data);
+      console.log(response.data.teamMembers);
+      const teamMembersEmails = response.data.teamMembers[0].split(" ");
+      console.log(teamMembersEmails);
+      response.data.teamMembers = teamMembersEmails;
+      setMeetingLink(response.data.meetLink);
+    } catch (error) {
+      console.error('Error fetching team details:', error);
+    }
   };
 
   const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +77,7 @@ const TeamDetails = () => {
     try {
       const accessToken = document.cookie
         .split('; ')
-        .find((row) => row.startsWith('adminaccessToken'))
+        .find((row) => row.startsWith('scaccessToken'))
         ?.split('=')[1];
 
       if (!accessToken) {
@@ -63,11 +96,12 @@ const TeamDetails = () => {
       }
 
       const requestBody = {
-        teamName: selectedTeam?.teamName || '', // Use optional chaining to handle null case
+        teamName: selectedTeam?.teamName || '',
+        domain: selectedTeam?.domain || '',
         meetLink: meetingLink,
       };
 
-      await axios.put('/api/teams', requestBody, {
+      await axios.put(`${BackendUrl}/seniorcore/meetLink`, requestBody, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -103,7 +137,7 @@ const TeamDetails = () => {
     try {
       const accessToken = document.cookie
         .split('; ')
-        .find((row) => row.startsWith('adminaccessToken'))
+        .find((row) => row.startsWith('scaccessToken'))
         ?.split('=')[1];
 
       if (!accessToken) {
@@ -125,10 +159,10 @@ const TeamDetails = () => {
         result: 1,
         email,
         round: 2,
-        domain: selectedTeam?.domain || 'events', // Use optional chaining and provide a fallback value
+        domain: selectedTeam?.domain || 'events',
       };
 
-      await axios.post('https://recruitments-portal-backend.vercel.app/eval/set_report', requestBody, {
+      await axios.post('https://recruitments-portal-backend.vercel.app/seniorcore/set_round2_gd', requestBody, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -164,7 +198,7 @@ const TeamDetails = () => {
     try {
       const accessToken = document.cookie
         .split('; ')
-        .find((row) => row.startsWith('adminaccessToken'))
+        .find((row) => row.startsWith('scaccessToken'))
         ?.split('=')[1];
 
       if (!accessToken) {
@@ -186,10 +220,10 @@ const TeamDetails = () => {
         result: 2,
         email,
         round: 2,
-        domain: selectedTeam?.domain || 'events', // Use optional chaining and provide a fallback value
+        domain: selectedTeam?.domain || 'events',
       };
 
-      await axios.post('https://recruitments-portal-backend.vercel.app/eval/set_report', requestBody, {
+      await axios.post('https://recruitments-portal-backend.vercel.app/seniorcore/set_round2_gd', requestBody, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -224,22 +258,20 @@ const TeamDetails = () => {
   return (
     <div className="flex">
       <div className="w-1/4 bg-white p-4 rounded-md">
-        <h2 className="text-xl font-bold mb-4">Domain : Events</h2>
+        <h2 className="text-xl font-bold mb-4">Domain : {domain}</h2>
         <h2 className="text-xl font-bold mb-4">Teams</h2>
-        {teams.map((team) => (
+        {teams.map((teamName) => (
           <div
-            key={team.teamName}
-            className={`p-2 rounded-md cursor-pointer ${
-              selectedTeam?.teamName === team.teamName ? 'bg-gray-200' : ''
-            }`}
-            onClick={() => handleTeamSelect(team)}
+            key={teamName}
+            className={`p-2 rounded-md cursor-pointer ${selectedTeam?.teamName === teamName ? 'bg-gray-200' : ''}`}
+            onClick={() => handleTeamSelect(teamName)}
           >
-            {team.teamName}
+            {teamName}
           </div>
         ))}
       </div>
       {selectedTeam && (
-        <div className="w-3/4 ml-4 bg-white p-4 rounded-md">
+        <div className="w-3/4 ml-4  bg-white p-4 rounded-md " >
           <h2 className="text-xl font-bold mb-4">Team Details</h2>
           <p>Domain: {selectedTeam.domain}</p>
           <p>Date: {selectedTeam.date}</p>
@@ -264,6 +296,7 @@ const TeamDetails = () => {
           </div>
           <h3 className="text-lg font-bold mb-2">Team Members:</h3>
           <ul className="list-disc pl-4">
+
             {selectedTeam.teamMembers.map((member, index) => (
               <li key={index} className="flex items-center mb-2">
                 <span>{member}</span>
@@ -289,5 +322,4 @@ const TeamDetails = () => {
     </div>
   );
 };
-
 export default TeamDetails;
