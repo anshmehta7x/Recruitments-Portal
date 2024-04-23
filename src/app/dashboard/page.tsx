@@ -33,7 +33,6 @@ export default function Page() {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setDomains(response.data.round2);
         setLoading(false);
       })

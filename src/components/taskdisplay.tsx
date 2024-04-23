@@ -69,7 +69,6 @@ export default function TaskDisplay({ domain }: { domain: string }) {
       difficulty: difficulty,
     });
     if (response) {
-      console.log(response);
       toast.success("Submitted Task.", {
         position: "bottom-center",
         autoClose: 5000,
