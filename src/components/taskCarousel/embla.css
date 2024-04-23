@@ -31,18 +31,15 @@
 .embla__controls {
   position: absolute;
   bottom: 0px;
-  right: 7px;
-  display: grid;
-  grid-template-columns: auto 1fr;
+  right: 4px;
+  width: 100px;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  gap: 1.2rem;
-}
-.embla__buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.2rem;
   align-items: center;
+  /* gap: 0.2rem; */
 }
+
 .embla__button {
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
   -webkit-appearance: none;
