@@ -44,7 +44,7 @@ export default function Page() {
   }, []);
 
   function getMainDomain(domain: string) {
-    if (domain === "pnm" || domain === "events" || domain === "editorial") {
+    if (domain === "pnm" || domain === "events") {
       return "Management";
     } else if (
       domain === "web" ||
