@@ -63,6 +63,7 @@ export default function Login() {
       .post(`${process.env.BACKEND_URL}/seniorcore/check-user`, {
         email: user.email,
       })
+
       .then((response) => {
         if (response.status === 200) {
           document.cookie = `email=${user.email}; path=/`;
