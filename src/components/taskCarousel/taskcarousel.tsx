@@ -70,19 +70,17 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       </div>
 
       <div className="embla__controls">
-        <div className="embla__buttons">
-          <PrevButton
-            onClick={handlePrevButtonClick}
-            disabled={prevBtnDisabled}
-          />
-          <span>
-            {currentIndex}/{totalSlides}
-          </span>
-          <NextButton
-            onClick={handleNextButtonClick}
-            disabled={nextBtnDisabled}
-          />
-        </div>
+        <PrevButton
+          onClick={handlePrevButtonClick}
+          disabled={prevBtnDisabled}
+        />
+        <span>
+          {currentIndex}/{totalSlides}
+        </span>
+        <NextButton
+          onClick={handleNextButtonClick}
+          disabled={nextBtnDisabled}
+        />
       </div>
     </section>
   );

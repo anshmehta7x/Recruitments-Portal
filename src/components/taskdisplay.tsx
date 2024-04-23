@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import EmblaCarousel from "@/components/taskCarousel/taskcarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import { GetTasks, SubmitTask } from "@/api";
+import EmblaCarousel from "./taskCarousel/taskcarousel";
 import Button from "./button";
+import SuccessToast, { ErrorToast } from "../components/toast";
 import { answerFormat } from "@/api";
 
 interface questions {
@@ -55,20 +56,18 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   };
 
   const submitTasks = async () => {
-    console.log({
-      ...input,
-      question: question,
-      domain: domain,
-      difficulty: difficulty,
-    });
+    if (input.link1 === "") {
+      ErrorToast({ message: "Please add atleast one link" });
+      return;
+    }
     const response = await SubmitTask({
       ...input,
       question: question,
       domain: domain,
       difficulty: difficulty,
     });
-    if (response) alert("Task Submitted Successfully");
-    else alert("Task Submission Failed");
+    if (response) SuccessToast({ message: "Task Submitted Successfully" });
+    else ErrorToast({ message: "Task Submission Failed , Try Again" });
   };
 
   const OPTIONS: EmblaOptionsType = {};
