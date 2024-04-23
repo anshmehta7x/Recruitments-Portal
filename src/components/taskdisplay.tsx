@@ -58,7 +58,7 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   };
 
   const submitTasks = async () => {
-    if (input.link1 === "") {
+    if (input.link1 === "" && input.link2 === "") {
       ErrorToast({ message: "Please add atleast one link" });
       return;
     }
@@ -69,7 +69,6 @@ export default function TaskDisplay({ domain }: { domain: string }) {
       difficulty: difficulty,
     });
     if (response) {
-      //clear inputs
       console.log(response);
       toast.success("Submitted Task.", {
         position: "bottom-center",
@@ -96,7 +95,6 @@ export default function TaskDisplay({ domain }: { domain: string }) {
         transition: Bounce,
       });
     }
-
   };
 
   const OPTIONS: EmblaOptionsType = {};
