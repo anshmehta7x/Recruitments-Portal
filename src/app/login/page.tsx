@@ -60,12 +60,10 @@ export default function Login() {
       });
 
     axios
-      .post(
-        `https://recruitments-portal-backend.vercel.app/seniorcore/check-user`,
-        {
-          email: user.email,
-        }
-      )
+      .post(`${process.env.BACKEND_URL}/seniorcore/check-user`, {
+        email: user.email,
+      })
+
       .then((response) => {
         if (response.status === 200) {
           document.cookie = `email=${user.email}; path=/`;

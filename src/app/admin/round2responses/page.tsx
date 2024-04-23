@@ -22,7 +22,7 @@ const Report: React.FC = () => {
         ?.split("=")[1];
 
       const noneResponse = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/admin/round2/none/${domain}`,
+        `${process.env.BACKEND_URL}/admin/round2/none/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -30,7 +30,7 @@ const Report: React.FC = () => {
         }
       );
       const acceptedResponse = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/admin/round2/accepted/${domain}`,
+        `${process.env.BACKEND_URL}/admin/round2/accepted/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -38,7 +38,7 @@ const Report: React.FC = () => {
         }
       );
       const rejectedResponse = await axios.get(
-        `https://recruitments-portal-backend.vercel.app/admin/round2/rejected/${domain}`,
+        `${process.env.BACKEND_URL}/admin/round2/rejected/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -91,40 +91,70 @@ const Report: React.FC = () => {
         <Button onClick={() => fetchData("uiux")} text="UI/UX" />
         <Button onClick={() => fetchData("video")} text="Video" />
         <Button onClick={() => fetchData("graphic")} text="Graphic" />
-        <Button onClick={() => fetchData("pnm")} text="Publicity and Marketing" />
+        <Button
+          onClick={() => fetchData("pnm")}
+          text="Publicity and Marketing"
+        />
         <Button onClick={() => fetchData("editorial")} text="Editorial" />
         <Button onClick={() => fetchData("events")} text="Events" />
       </div>
       <div className="flex flex-col items-center w-[35%] mt-[8%]">
         <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] mr-[10vw] overflow-auto text-center">
-          <h3 className="text-lg font-semibold mb-2">Current Domain : {selectedDomain.toUpperCase() || "No Domain Selected!"}</h3>
+          <h3 className="text-lg font-semibold mb-2">
+            Current Domain :{" "}
+            {selectedDomain.toUpperCase() || "No Domain Selected!"}
+          </h3>
         </div>
         <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] mr-[10vw] overflow-auto">
-          <h2 className="text-xl font-bold mb-2">None (to be decided) - {noneToBeDecided.length} responses </h2>
+          <h2 className="text-xl font-bold mb-2">
+            None (to be decided) - {noneToBeDecided.length} responses{" "}
+          </h2>
           {noneToBeDecided.map((item, index) => (
-            <div key={index} onClick={() => openResponseDetails(item.EmailID)} className="cursor-pointer">
+            <div
+              key={index}
+              onClick={() => openResponseDetails(item.EmailID)}
+              className="cursor-pointer"
+            >
               {item.EmailID}
             </div>
           ))}
         </div>
         <div className="bg-white p-4 rounded-md mb-4 w-full max-h-[50vh] mr-[10vw] overflow-auto">
-          <h2 className="text-xl font-bold mb-2">Accepted - {accepted.length} responses </h2>
+          <h2 className="text-xl font-bold mb-2">
+            Accepted - {accepted.length} responses{" "}
+          </h2>
           {accepted.map((item, index) => (
-            <div key={index} onClick={() => openResponseDetails(item.EmailID)} className="cursor-pointer">
+            <div
+              key={index}
+              onClick={() => openResponseDetails(item.EmailID)}
+              className="cursor-pointer"
+            >
               {item.EmailID}
             </div>
           ))}
         </div>
         <div className="bg-white p-4 rounded-md w-full max-h-[50vh] mr-[10vw] overflow-auto">
-          <h2 className="text-xl font-bold mb-2">Rejected - {rejected.length} responses </h2>
+          <h2 className="text-xl font-bold mb-2">
+            Rejected - {rejected.length} responses{" "}
+          </h2>
           {rejected.map((item, index) => (
-            <div key={index} onClick={() => openResponseDetails(item.EmailID)} className="cursor-pointer">
+            <div
+              key={index}
+              onClick={() => openResponseDetails(item.EmailID)}
+              className="cursor-pointer"
+            >
               {item.EmailID}
             </div>
           ))}
         </div>
       </div>
-      {selectedEmail && <ResponseDetails email={selectedEmail} onClose={closeResponseDetails} domain={selectedDomain} />}
+      {selectedEmail && (
+        <ResponseDetails
+          email={selectedEmail}
+          onClose={closeResponseDetails}
+          domain={selectedDomain}
+        />
+      )}
     </div>
   );
 };
