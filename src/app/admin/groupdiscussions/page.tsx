@@ -1,10 +1,10 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Link from 'next/link';
-import { Bounce, toast } from 'react-toastify';
+"use client";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Link from "next/link";
+import { Bounce, toast } from "react-toastify";
 
-const BackendUrl = "https://recruitments-portal-backend.vercel.app";
+const BackendUrl = `${process.env.BACKEND_URL}`;
 
 interface GDData {
   domain: string;
@@ -19,14 +19,14 @@ interface GDData {
 const GroupDiscussionPage: React.FC = () => {
   const [eventsGDList, setEventsGDList] = useState<GDData[]>([]);
   const [pnmGDList, setPnmGDList] = useState<GDData[]>([]);
-  const [domain, setDomain] = useState<'events' | 'pnm'>('events');
+  const [domain, setDomain] = useState<"events" | "pnm">("events");
   const [showCreateGD, setShowCreateGD] = useState<boolean>(false);
   const [newGDData, setNewGDData] = useState<GDData>({
     domain: domain,
-    teamName: '',
-    date: '24 April 2026',
-    time: '10PM - 11PM',
-    meetLink: 'To be Updated!',
+    teamName: "",
+    date: "24 April 2026",
+    time: "10PM - 11PM",
+    meetLink: "To be Updated!",
     teamMembers: [],
     supervisors: [],
   });
@@ -36,28 +36,31 @@ const GroupDiscussionPage: React.FC = () => {
     fetchGDList("pnm");
   }, []);
 
-  const fetchGDList = async (domain: 'events' | 'pnm') => {
+  const fetchGDList = async (domain: "events" | "pnm") => {
     try {
       const accessToken = document.cookie
         .split("; ")
         .find((row) => row.startsWith("adminaccessToken"))
         ?.split("=")[1];
-      const response = await axios.get<GDData[]>(`${BackendUrl}/admin/get-gd/${domain}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (domain === 'events') {
+      const response = await axios.get<GDData[]>(
+        `${BackendUrl}/admin/get-gd/${domain}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if (domain === "events") {
         setEventsGDList(response.data);
-      } else if (domain === 'pnm') {
+      } else if (domain === "pnm") {
         setPnmGDList(response.data);
       }
     } catch (error) {
-      console.error('Error fetching GD list:', error);
+      console.error("Error fetching GD list:", error);
     }
   };
 
-  const handleDomainChange = (selectedDomain: 'events' | 'pnm') => {
+  const handleDomainChange = (selectedDomain: "events" | "pnm") => {
     setDomain(selectedDomain);
     setNewGDData({ ...newGDData, domain: selectedDomain });
   };
@@ -65,46 +68,49 @@ const GroupDiscussionPage: React.FC = () => {
   const handleCreateGD = async () => {
     try {
       const accessToken = document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('adminaccessToken'))
-        ?.split('=')[1];
+        .split("; ")
+        .find((row) => row.startsWith("adminaccessToken"))
+        ?.split("=")[1];
 
-      const response = await axios.put(`${BackendUrl}/admin/create-gd`, newGDData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await axios.put(
+        `${BackendUrl}/admin/create-gd`,
+        newGDData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       toast.success("GD Created Succesfully", {
-        position: 'bottom-center',
-             autoClose: 5000,
-             hideProgressBar: false,
-             closeOnClick: true,
-             pauseOnHover: true,
-             draggable: true,
-             progress: undefined,
-             theme: 'dark',
-             transition: Bounce,
-           });
-      setShowCreateGD(false);
-      fetchGDList(domain);
-    } catch (error) {
-      console.error('Error creating GD:', error);
-       toast.error("A team with GD already Exist", {
-   position: 'bottom-center',
+        position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: 'dark',
+        theme: "dark",
         transition: Bounce,
       });
-      
+      setShowCreateGD(false);
+      fetchGDList(domain);
+    } catch (error) {
+      console.error("Error creating GD:", error);
+      toast.error("A team with GD already Exist", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 
-  const currentGDList = domain === 'events' ? eventsGDList : pnmGDList;
+  const currentGDList = domain === "events" ? eventsGDList : pnmGDList;
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -118,9 +124,10 @@ const GroupDiscussionPage: React.FC = () => {
         <div className="bg-white p-8 rounded-md mr-4">
           <div className="flex justify-between mb-4">
             <button
-              onClick={() => handleDomainChange('events')}
-              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${domain === 'events' ? 'bg-blue-700' : ''
-                }`}
+              onClick={() => handleDomainChange("events")}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                domain === "events" ? "bg-blue-700" : ""
+              }`}
             >
               Events
             </button>
@@ -143,9 +150,10 @@ const GroupDiscussionPage: React.FC = () => {
         <div className="bg-white p-8 rounded-md">
           <div className="flex justify-between mb-4">
             <button
-              onClick={() => handleDomainChange('pnm')}
-              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${domain === 'pnm' ? 'bg-blue-700' : ''
-                }`}
+              onClick={() => handleDomainChange("pnm")}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                domain === "pnm" ? "bg-blue-700" : ""
+              }`}
             >
               PNM
             </button>
@@ -166,7 +174,11 @@ const GroupDiscussionPage: React.FC = () => {
           </ul>
         </div>
       </div>
-      <div className={`fixed inset-0 flex items-center justify-center ${showCreateGD ? 'visible' : 'invisible'}`}>
+      <div
+        className={`fixed inset-0 flex items-center justify-center ${
+          showCreateGD ? "visible" : "invisible"
+        }`}
+      >
         <div className="bg-white p-8 rounded-md">
           <div className="flex justify-between mb-4">
             <h2 className="text-xl font-bold">Create New GD for {domain}</h2>
@@ -240,11 +252,13 @@ const GroupDiscussionPage: React.FC = () => {
             <input
               type="text"
               id="teamMembers"
-              value={newGDData.teamMembers.join(', ')}
+              value={newGDData.teamMembers.join(", ")}
               onChange={(e) =>
                 setNewGDData({
                   ...newGDData,
-                  teamMembers: e.target.value.split(',').map((email) => email.trim()),
+                  teamMembers: e.target.value
+                    .split(",")
+                    .map((email) => email.trim()),
                 })
               }
               className="border border-gray-300 rounded-md px-2 py-1 w-full"
@@ -257,11 +271,13 @@ const GroupDiscussionPage: React.FC = () => {
             <input
               type="text"
               id="supervisors"
-              value={newGDData.supervisors.join(' ')}
+              value={newGDData.supervisors.join(" ")}
               onChange={(e) =>
                 setNewGDData({
                   ...newGDData,
-                  supervisors: e.target.value.split(' ').map((email) => email.trim()),
+                  supervisors: e.target.value
+                    .split(" ")
+                    .map((email) => email.trim()),
                 })
               }
               className="border border-gray-300 rounded-md px-2 py-1 w-full"
