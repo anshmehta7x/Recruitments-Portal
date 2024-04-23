@@ -58,11 +58,14 @@ export default function Login() {
       .catch((error) => {
         console.log(error);
       });
-  
+
     axios
-      .post("http://localhost:4030/seniorcore/check-user", {
-        email: user.email,
-      })
+      .post(
+        `https://recruitments-portal-backend.vercel.app/seniorcore/check-user`,
+        {
+          email: user.email,
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           document.cookie = `email=${user.email}; path=/`;
@@ -74,7 +77,7 @@ export default function Login() {
       .catch((error) => {
         console.log(error);
       });
-  
+
     axios
       .post(`${process.env.BACKEND_URL}/check_user`, {
         email: user.email,
