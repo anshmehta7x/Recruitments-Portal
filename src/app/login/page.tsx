@@ -52,20 +52,35 @@ export default function Login() {
           document.cookie = `adminaccessToken=${response.data.token}; path=/`;
           removeLoader();
           router.push("/admin/dashboard");
-        } else {
+          return; // Add this line to exit the function
         }
       })
       .catch((error) => {
         console.log(error);
       });
-
+  
+    axios
+      .post("http://localhost:4030/seniorcore/check-user", {
+        email: user.email,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          document.cookie = `email=${user.email}; path=/`;
+          document.cookie = `scaccessToken=${response.data.token}; path=/`;
+          removeLoader();
+          router.push("/admin/seniorCore/dashboard");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
     axios
       .post(`${process.env.BACKEND_URL}/check_user`, {
         email: user.email,
       })
       .then((response) => {
         if (response.status === 200) {
-          //create cookie of user email and response.data.accessToken
           document.cookie = `email=${user.email}; path=/`;
           document.cookie = `accessToken=${response.data.accessToken}; path=/`;
           document.cookie = `photoURL=${user.photoURL}; path=/`;
@@ -83,7 +98,6 @@ export default function Login() {
             theme: "dark",
             transition: Bounce,
           });
-
           removeLoader();
         }
       })
@@ -102,7 +116,6 @@ export default function Login() {
         removeLoader();
       });
   }
-
   function handleLogin() {
     setLoading(true);
     const app = initializeApp(firebaseConfig);

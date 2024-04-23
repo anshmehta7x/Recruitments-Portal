@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 interface Response {
   _id: {
@@ -64,7 +65,6 @@ const ProfilePage: React.FC = () => {
           },
         }
       );
-
       const filteredResponses = responseResponse.data.filter(
         (response: Response) => response.domain === domain
       );

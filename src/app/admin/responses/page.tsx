@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ResponseDetails from "./ResponseDetails";
 import { Bounce, toast } from "react-toastify";
+import Link from "next/link";
 
 const Button = dynamic(() => import("@/components/button"), { ssr: false });
 
@@ -96,6 +97,7 @@ const StudentResponses: React.FC = () => {
   };
   return (
     <>
+
       <button
         className="text-white border-2 border-white top-5 left-5 fixed p-5"
         onClick={() => {
@@ -104,6 +106,7 @@ const StudentResponses: React.FC = () => {
       >
         Back
       </button>
+
       <div className="flex justify-between h-screen flex-wrap">
         <div className="flex flex-col items-start mr-10 w-[50%] h-[110vh] flex-wrap mt-[8%]">
           <Button onClick={() => fetchData("web")} text="Web" />
