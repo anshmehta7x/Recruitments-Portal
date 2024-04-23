@@ -40,7 +40,7 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   }, []);
 
   const getSlides = () => {
-    if (!tasks) return ["No tasks found, Kindly refersh the page."];
+    if (!tasks) return ["No tasks found, try refreshing the page."];
     switch (difficulty) {
       case "easy":
         return tasks["easy"];
