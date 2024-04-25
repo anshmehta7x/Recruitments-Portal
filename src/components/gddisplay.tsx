@@ -47,7 +47,7 @@ export default function GroupDiscussion(props: any) {
       <p>Date : {date}</p>
       <p>Time : {time}</p>
       <p>
-        Venue:
+        Meet Link :
         <a href={meetingLink} target="_blank">
           {meetingLink}
         </a>
