@@ -2,26 +2,45 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
-interface Response {
+interface ResponseRound2 {
   _id: string;
   email: string;
   domain: string;
-  startTime: string;
-  submissionTime: string;
-  endTime: string;
-  questions: { q: string; ans: string; _id: string }[];
+  easy: {
+    question: string;
+    links: {
+      link1: string;
+      link2: string[];
+    };
+  }[];
+  medium: {
+    question: string;
+    links: {
+      link1: string;
+      link2: string[];
+    };
+  }[];
+  hard: {
+    question: string;
+    links: {
+      link1: string;
+      link2: string[];
+    };
+  }[];
 }
 
-const ResponseDetails = ({
-  email,
-  onClose,
-  domain,
-}: {
+interface ResponseDetailsProps {
   email: string;
   onClose: () => void;
   domain: string;
+}
+
+const ResponseDetails: React.FC<ResponseDetailsProps> = ({
+  email,
+  onClose,
+  domain,
 }) => {
-  const [responseDetails, setResponseDetails] = useState<Response[]>([]);
+  const [responseDetails, setResponseDetails] = useState<ResponseRound2[]>([]);
 
   const handleApprove = async () => {
     try {
@@ -183,7 +202,7 @@ const ResponseDetails = ({
           return;
         }
 
-        const response = await axios.get<Response[]>(
+        const response = await axios.get<ResponseRound2[]>(
           `${process.env.BACKEND_URL}/response/round2/${email}`,
           {
             headers: {
@@ -237,17 +256,32 @@ const ResponseDetails = ({
               <div key={response._id} className="mb-4">
                 <p>Email: {response.email}</p>
                 <p>Domain: {response.domain}</p>
-                <p>Start Time: {response.startTime}</p>
-                <p>
-                  Submission Time: {response.submissionTime || "Not submitted"}
-                </p>
-                <p>End Time: {response.endTime}</p>
-                <h3>Questions:</h3>
+                <h3>Easy Questions:</h3>
                 <ul>
-                  {response.questions.map((question) => (
-                    <li key={question._id}>
-                      <strong>{question.q}</strong>
-                      <p>Answer: {question.ans}</p>
+                  {response.easy.map((question, index) => (
+                    <li key={index}>
+                      <strong>{question.question}</strong>
+                      <p>Link 1: {question.links.link1}</p>
+                      <p>Link 2: {question.links.link2.join(", ")}</p>
+                    </li>
+                  ))}
+                </ul>
+                <h3>Medium Questions:</h3>
+                <ul>{response.medium.map((question, index) => (
+                  <li key={index}>
+                    <strong>{question.question}</strong>
+                    <p>Link 1: {question.links.link1}</p>
+                    <p>Link 2: {question.links.link2.join(", ")}</p>
+                  </li>
+                ))}
+                </ul>
+                <h3>Hard Questions:</h3>
+                <ul>
+                  {response.hard.map((question, index) => (
+                    <li key={index}>
+                      <strong>{question.question}</strong>
+                      <p>Link 1: {question.links.link1}</p>
+                      <p>Link 2: {question.links.link2.join(", ")}</p>
                     </li>
                   ))}
                 </ul>

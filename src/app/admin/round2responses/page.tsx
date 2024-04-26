@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
-import ResponseDetails from "../responses/ResponseDetails";
+import ResponseDetails from "./ResponseDetails";
 import Link from "next/link";
 const Button = dynamic(() => import("@/components/button"), { ssr: false });
 
@@ -77,17 +77,17 @@ const Report: React.FC = () => {
   return (
     <div className="flex justify-between h-screen flex-wrap">
       <Link
-        href="/admin/dashboard"
-        className="absolute left-2 top-3  bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Back
-      </Link>
+          href="/admin/dashboard"
+          className="absolute left-2 top-3  bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Back
+        </Link>
       <div className="flex flex-col items-start mr-10 w-[50%] h-[110vh] flex-wrap mt-[8%]">
         <Button onClick={() => fetchData("web")} text="Web" />
         <Button onClick={() => fetchData("aiml")} text="AIML" />
         <Button onClick={() => fetchData("app")} text="App" />
         <Button onClick={() => fetchData("devops")} text="DevOps" />
-        {/* <Button onClick={() => fetchData("research")} text="Research" /> */}
+        <Button onClick={() => fetchData("research")} text="Research" />
         <Button onClick={() => fetchData("uiux")} text="UI/UX" />
         <Button onClick={() => fetchData("video")} text="Video" />
         <Button onClick={() => fetchData("graphic")} text="Graphic" />
