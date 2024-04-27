@@ -17,6 +17,9 @@ export default function GroupDiscussion(props: any) {
   const [time, setTime] = useState<string>("");
   const [meetingLink, setMeetingLink] = useState<string>("");
 
+  const [isResult, setIsResult] = useState<boolean>(false);
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -30,28 +33,52 @@ export default function GroupDiscussion(props: any) {
       )
       .then((res) => {
         const data = res.data;
-        setTeamNum(data[0].teamName);
-        setDate(data[0].date);
-        setTime(data[0].time);
-        setMeetingLink(data[0].meetLink);
-        setLoading(false);
+        console.log(data);
+
+        if (domain === "pnm") {
+          setIsResult(true);
+          setIsSelected(data.isSelected);
+          setLoading(false);
+        } else {
+          setTeamNum(data[0].teamName);
+          setDate(data[0].date);
+          setTime(data[0].time);
+          setMeetingLink(data[0].meetLink);
+          setLoading(false);
+        }
       });
   }, [domain]);
 
   return (
     <div className="h-[45vh] w-[90%] max-w-[600px] p-5 text-xl resize-none shadow-3xl border-main-blue border-2  bg-main-blue bg-opacity-40 backdrop-blur-[2px] rounded-xl  text-start text-white overflow-visible my-auto flex items-center flex-col gap-3 font-bold ">
       <Loader visibility={loading} />
-      <p className="font-striger sm:text-3xl text-lg text-main-pink">
-        Group Discussion Schedule
-      </p>
-      <p>Date : {date}</p>
-      <p>Time : {time}</p>
-      <p>
-        Meet Link :
-        <a href={meetingLink} target="_blank">
-          {meetingLink}
-        </a>
-      </p>
+      {!isResult ? (
+        <div>
+          <p className="font-striger sm:text-3xl text-lg text-main-pink">
+            Group Discussion Schedule
+          </p>
+          <p>Date : {date}</p>
+          <p>Time : {time}</p>
+          <p>
+            Meet Link :
+            <a href={meetingLink} target="_blank">
+              {meetingLink}
+            </a>
+          </p>
+        </div>
+      ) : (
+        <div>
+          {isSelected ? (
+            <p className="font-striger sm:text-3xl text-lg text-main-pink">
+              Congratulations! You have been selected in this domain.
+            </p>
+          ) : (
+            <p className="font-striger sm:text-3xl text-lg text-main-pink">
+              Sorry! You have not been selected in this domain.
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

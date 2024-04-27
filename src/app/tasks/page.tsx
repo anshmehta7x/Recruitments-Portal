@@ -30,7 +30,7 @@ export default function Tasks() {
   const checkDomain = (domain: string | null) => {
     if (!domain) return false;
     const tasks = ["uiux", "web", "app", "graphic", "video", "devops", "aiml"];
-    const gd = ["events"];
+    const gd = ["events", "pnm"];
     return tasks.includes(domain)
       ? true
       : gd.includes(domain)
