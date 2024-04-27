@@ -74,7 +74,7 @@ export default function GroupDiscussion(props: any) {
             </p>
           ) : (
             <p className="font-striger sm:text-3xl text-lg text-main-pink">
-              Sorry! You have not been selected in this domain.
+              Welcome to IEEE-CS. Join our discord for updates.
             </p>
           )}
         </div>
