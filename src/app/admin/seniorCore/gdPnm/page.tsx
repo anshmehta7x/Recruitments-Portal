@@ -65,9 +65,7 @@ const TeamDetails = () => {
         }
       );
       setSelectedTeam(response.data);
-      console.log(response.data.teamMembers);
       const teamMembersEmails = response.data.teamMembers[0].split(" ");
-      console.log(teamMembersEmails);
       response.data.teamMembers = teamMembersEmails;
       setMeetingLink(response.data.meetLink);
     } catch (error) {

@@ -18,6 +18,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [question, setQuestion] = useState("");
   const totalSlides = slides.length;
 
   const {
@@ -28,7 +29,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi);
 
   useEffect(() => {
-    props.questionNo(slides[0]);
     const onSelect = () => {
       if (emblaApi) {
         setCurrentIndex(emblaApi.selectedScrollSnap());
@@ -54,8 +54,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     setCurrentIndex((prevIndex) => prevIndex + 1);
   };
   useEffect(() => {
-    props.questionNo(slides[currentIndex - 1]);
-  }, [currentIndex]);
+    const slideIndex = currentIndex - 1;
+    const indexToSend =
+      slideIndex >= 0 && slideIndex < slides.length
+        ? slideIndex
+        : slides.length - 1;
+    props.questionNo(slides[indexToSend]);
+    setQuestion(slides[indexToSend]);
+  }, [currentIndex, slides]);
 
   return (
     <section className="embla">
@@ -75,7 +81,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           disabled={prevBtnDisabled}
         />
         <span>
-          {currentIndex}/{totalSlides}
+          {slides.indexOf(question) + 1}/{totalSlides}
         </span>
         <NextButton
           onClick={handleNextButtonClick}
