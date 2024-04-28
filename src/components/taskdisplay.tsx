@@ -69,6 +69,7 @@ export default function TaskDisplay({ domain }: { domain: string }) {
       difficulty: difficulty,
     });
     if (response) {
+      setAttempt(false);
       toast.success("Submitted Task.", {
         position: "bottom-center",
         autoClose: 5000,
@@ -114,11 +115,13 @@ export default function TaskDisplay({ domain }: { domain: string }) {
           <option value="hard">Hard</option>
         </select>
         <div className="overflow-auto  w-full h-[99%]">
-          <EmblaCarousel
-            slides={SLIDES}
-            options={OPTIONS}
-            questionNo={setQuestion}
-          />
+          {SLIDES.length > 0 && (
+            <EmblaCarousel
+              slides={SLIDES}
+              options={OPTIONS}
+              questionNo={setQuestion}
+            />
+          )}
         </div>
         <button
           className="bg-[#F7AB31] text-main-blue  px-4 rounded-xl text-center absolute bottom-0 right-[50%] translate-x-[50%] translate-y-[50%] z-10"
