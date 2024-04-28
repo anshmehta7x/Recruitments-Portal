@@ -59,7 +59,7 @@ export default function Page() {
 
   return (
     <>
-      <Loader visibility={loading} />
+      {/* <Loader visibility={loading} />
       {domains.length > 0 ? (
         <div className="flex flex-col items-center w-full min-h-screen pt-[15vh]">
           <section className="flex flex-col font-striger text-center text-2xl md:text-4xl mb-[5vh]">
@@ -98,7 +98,19 @@ export default function Page() {
             }}
           />
         </div>
-      )}
+      )} */}
+      <div className="flex flex-col items-center w-full min-h-screen pt-[15vh]">
+        <section className="flex flex-col font-striger text-center text-2xl md:text-4xl mb-[5vh] justify-around">
+          <h1 className="text-main-pink">Round 2 is over</h1>
+          <h1 className="text-white">The responses are being evaluated</h1>{" "}
+          <h1 className="text-white">
+            Join our{" "}
+            <a className="underline" href="https://discord.gg/vR7Q6rDAQB">
+              discord
+            </a>
+          </h1>
+        </section>
+      </div>
     </>
   );
 }
