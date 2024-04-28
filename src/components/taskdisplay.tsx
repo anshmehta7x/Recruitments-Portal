@@ -58,6 +58,7 @@ export default function TaskDisplay({ domain }: { domain: string }) {
   };
 
   const submitTasks = async () => {
+    return;
     if (input.link1 === "" && input.link2 === "") {
       ErrorToast({ message: "Please add atleast one link" });
       return;
