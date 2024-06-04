@@ -54,10 +54,10 @@ export default function AdminDashboard() {
                 Round 3 : Events
               </Link>
               <Link
-                href="/admin/seniorCore/groupdiscussions"
+                href="/admin/seniorCore/gdApp"
                 className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
               >
-                Create Events GD
+                Round 3 : App
               </Link>
             </div>
           </main>

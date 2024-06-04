@@ -243,5 +243,7 @@ const GroupDiscussionPage: React.FC = () => {
     </div>
   );
 };
-
-export default GroupDiscussionPage;
+const empty = ()=>{
+  return <></>
+}
+export default empty;
