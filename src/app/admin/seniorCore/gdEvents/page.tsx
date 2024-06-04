@@ -37,7 +37,7 @@ const TeamDetails = () => {
         ?.split("=")[1];
       const domain = "events";
       const response = await axios.get(
-        `${BackendUrl}/seniorcore/group-discussion/${domain}/${userEmail}`,
+        `${BackendUrl}/seniorcore/group-discussion/round3/${domain}/${userEmail}`,
         {
           headers: {
             Authorization: `Bearer ${sctoken}`,
@@ -57,7 +57,7 @@ const TeamDetails = () => {
         .find((row) => row.startsWith("scaccessToken"))
         ?.split("=")[1];
       const response = await axios.get(
-        `${BackendUrl}/seniorcore/teamDetails/${teamName}/${domain}`,
+        `${BackendUrl}/seniorcore/teamDetails/round3/${teamName}/${domain}`,
         {
           headers: {
             Authorization: `Bearer ${sctoken}`,
@@ -105,7 +105,7 @@ const TeamDetails = () => {
         meetLink: meetingLink,
       };
 
-      await axios.put(`${BackendUrl}/seniorcore/meetLink`, requestBody, {
+      await axios.put(`${BackendUrl}/seniorcore/meetLink/round3`, requestBody, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -162,12 +162,12 @@ const TeamDetails = () => {
       const requestBody = {
         result: 1,
         email,
-        round: 2,
+        round: 3,
         domain: selectedTeam?.domain || "events",
       };
 
       await axios.post(
-        `${process.env.BACKEND_URL}/seniorcore/set_round2_gd`,
+        `${process.env.BACKEND_URL}/seniorcore/set_round3_gd`,
         requestBody,
         {
           headers: {
@@ -227,12 +227,12 @@ const TeamDetails = () => {
       const requestBody = {
         result: 2,
         email,
-        round: 2,
+        round: 3,
         domain: selectedTeam?.domain || "events",
       };
 
       await axios.post(
-        `${process.env.BACKEND_URL}/seniorcore/set_round2_gd`,
+        `${process.env.BACKEND_URL}/seniorcore/set_round3_gd`,
         requestBody,
         {
           headers: {
