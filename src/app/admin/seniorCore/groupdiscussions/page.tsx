@@ -243,7 +243,7 @@ const GroupDiscussionPage: React.FC = () => {
     </div>
   );
 };
-const bye = () =>{
-  window.location.href = "admin/seniorCore/dashboard";
+const empty = ()=>{
+  return <></>
 }
-export default bye;
+export default empty;
