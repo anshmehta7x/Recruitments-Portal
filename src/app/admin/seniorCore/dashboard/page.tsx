@@ -51,14 +51,13 @@ export default function AdminDashboard() {
                 href="/admin/seniorCore/gdEvents"
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
               >
-                GD: Events
+                Round 3 : Events
               </Link>
-              
               <Link
-                href="/admin/seniorCore/gdPnm"
+                href="/admin/seniorCore/groupdiscussions"
                 className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
               >
-                GD: PNM
+                Create Events GD
               </Link>
             </div>
           </main>
