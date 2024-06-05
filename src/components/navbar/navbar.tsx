@@ -88,7 +88,7 @@ export default function Nav() {
                   />
                   <HamNavLink
                     target="/events"
-                    text="Round-3"
+                    text="Events Round-3"
                     active={pathname === "/events"}
                     setIsShown={setIsShown}
                   />
@@ -160,7 +160,7 @@ export default function Nav() {
           />
           <Navlink
             target="/events"
-            text="Round-3"
+            text="Events Round-3"
             active={pathname === "/events"}
           />
           <Navlink
