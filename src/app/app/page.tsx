@@ -12,6 +12,7 @@ interface Events {
 export default function EventsPage() {
   const [event, setEvent] = useState<Events>();
   const [error, setError] = useState(null);
+  const [hasEvent, setHasEvent] = useState(true);
 
   const fetchDetail = async () => {
     const accessToken = document.cookie
@@ -31,12 +32,19 @@ export default function EventsPage() {
           },
         }
       );
+
       if (res.status === 200) {
         setEvent(res.data[0]);
       } else {
         throw new Error(`Request failed with status ${res.data}`);
       }
     } catch (error: any) {
+      if (error.response.status === 404) {
+        setHasEvent(false);
+        return;
+      }
+      console.log(error);
+
       setError(error.message);
     }
   };
@@ -55,27 +63,37 @@ export default function EventsPage() {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="h-[45vh] w-[90%] max-w-[600px] p-5 text-xl resize-none shadow-3xl border-main-blue border-2  bg-main-blue bg-opacity-40 backdrop-blur-[2px] rounded-xl  text-start text-white overflow-visible my-auto flex items-center flex-col gap-3 font-bold ">
-        {event ? (
-          <div>
+      {hasEvent ? (
+        <div className="h-[45vh] w-[90%] max-w-[600px] p-5 text-xl resize-none shadow-3xl border-main-blue border-2  bg-main-blue bg-opacity-40 backdrop-blur-[2px] rounded-xl  text-start text-white overflow-visible my-auto flex items-center flex-col gap-3 font-bold ">
+          {event ? (
             <div>
-              <p className="font-striger sm:text-3xl text-lg text-main-pink text-center mb-4">
-                {event.teamName}
-              </p>
-              <p>Date : {event.date}</p>
-              <p>Time : {event.time}</p>
-              <p>
-                Meet Link :
-                <a href={event.meetLink} target="_blank">
-                  {event.meetLink}
-                </a>
-              </p>
+              <div>
+                <p className="font-striger sm:text-3xl text-lg text-main-pink text-center mb-4">
+                  Details
+                </p>
+                <p>Date : {event.date}</p>
+                <p>Time : {event.time}</p>
+                <p>
+                  Meet Link :
+                  <a href={event.meetLink} target="_blank">
+                    {event.meetLink}
+                  </a>
+                </p>
+              </div>
             </div>
+          ) : (
+            <div>Loading...</div>
+          )}
+        </div>
+      ) : (
+        <div className="h-[45vh] w-[90%] max-w-[600px] p-5 text-xl resize-none shadow-3xl border-main-blue border-2  bg-main-blue bg-opacity-40 backdrop-blur-[2px] rounded-xl  text-start text-white overflow-visible my-auto flex items-center flex-col gap-3 font-bold ">
+          <div>
+            <p className="font-striger sm:text-3xl text-lg text-main-pink text-center mb-4">
+              Welcome to IEEE-CS Outer Core Committee
+            </p>
           </div>
-        ) : (
-          <div>Loading...</div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
