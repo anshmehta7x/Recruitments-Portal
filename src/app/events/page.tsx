@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/button";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
@@ -88,12 +89,19 @@ export default function EventsPage() {
           )}
         </div>
       ) : (
-        <div className="h-[45vh] w-[90%] max-w-[600px] p-5 text-xl resize-none shadow-3xl border-main-blue border-2  bg-main-blue bg-opacity-40 backdrop-blur-[2px] rounded-xl  text-start text-white overflow-visible my-auto flex items-center flex-col gap-3 font-bold ">
-          <div>
-            <p className="font-striger sm:text-3xl text-lg text-main-pink text-center mb-4">
-              Welcome to IEEE-CS Outer Core Committee
-            </p>
-          </div>
+        <div className="flex flex-col justify-evenly items-center w-full min-h-screen pt-[15vh] font-striger text-3xl text-center md:text-5xl">
+          <h1 className="text-main-pink">
+            Welcome to IEEE-CS OUTER CORE COMMITTEE
+          </h1>
+          <h2 className="text-white">
+            Join our discord server to stay updated
+          </h2>
+          <Button
+            text="Join Discord"
+            onClick={() => {
+              window.open("https://discord.gg/vR7Q6rDAQB");
+            }}
+          />
         </div>
       )}
     </div>
