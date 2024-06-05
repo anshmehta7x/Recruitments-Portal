@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import { Console } from "console";
 import { useState, useEffect } from "react";
 
 interface Events {
