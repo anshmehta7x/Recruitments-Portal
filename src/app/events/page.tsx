@@ -90,7 +90,9 @@ export default function EventsPage() {
         </div>
       ) : (
         <div className="flex flex-col justify-evenly items-center w-full min-h-screen pt-[15vh] font-striger text-3xl text-center md:text-5xl">
-          <h1 className="text-main-pink">Welcome to IEEE-CS CORE COMMITTEE</h1>
+          <h1 className="text-main-pink">
+            Welcome to IEEE-CS OUTER CORE COMMITTEE
+          </h1>
           <h2 className="text-white">
             Join our discord server to stay updated
           </h2>
