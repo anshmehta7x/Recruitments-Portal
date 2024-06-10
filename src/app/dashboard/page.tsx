@@ -7,12 +7,12 @@ import Loader from "@/components/loader";
 import Button from "@/components/button";
 
 export default function Page() {
-  type DomainType = {
+  type Round3ResultType = {
     domain: string;
-    hasSubmittedResponses: boolean;
+    round3Result: string;
   };
 
-  const [domains, setDomains] = useState<DomainType[]>([]);
+  const [round3Results, setRound3Results] = useState<Round3ResultType[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -27,13 +27,13 @@ export default function Page() {
       ?.split("=")[1];
 
     axios
-      .get(`${process.env.BACKEND_URL}/round2/get_details/${cookieValue}`, {
+      .get(`${process.env.BACKEND_URL}/round3/get_details/${cookieValue}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((response) => {
-        setDomains(response.data.round2);
+        setRound3Results(response.data.round3);
         setLoading(false);
       })
       .catch((error) => {
@@ -57,33 +57,80 @@ export default function Page() {
     }
   }
 
+  const pendingResults = round3Results.filter(
+    (result) => result.round3Result === "Pending"
+  );
+  const acceptedResults = round3Results.filter(
+    (result) => result.round3Result === "Accepted"
+  );
+  const rejectedResults = round3Results.filter(
+    (result) => result.round3Result === "Rejected"
+  );
+
   return (
     <>
-      {/* <Loader visibility={loading} />
-      {domains.length > 0 ? (
+      <Loader visibility={loading} />
+      {round3Results.length > 0 ? (
         <div className="flex flex-col items-center w-full min-h-screen pt-[15vh]">
           <section className="flex flex-col font-striger text-center text-2xl md:text-4xl mb-[5vh]">
-            <h1 className="text-main-pink">Congratulations!</h1>
-            <h1 className="text-white">
-              you have been selected in the following domains
-            </h1>
+            <h1 className="text-main-pink">Round 3 Results</h1>
           </section>
+
+          {acceptedResults.length > 0 && (
+            <section className="flex flex-col w-full px-[5vw] md:mb-5">
+              <h1 className="font-striger text-4xl text-white">
+                Accepted Results
+              </h1>
+              <div className="flex items-center justify-center w-full px-8">
+                <section className="flex flex-col md:grid md:grid-cols-3 md:gap-8 w-full my-2 pb-2">
+                  {acceptedResults.map((result, index) => (
+                    <Taskcard
+                      domain={getMainDomain(result.domain)}
+                      subDomain={result.domain}
+                      completed={true}
+                      key={index}
+                    />
+                  ))}
+                </section>
+              </div>
+            </section>
+          )}
+
           <section className="flex flex-col w-full px-[5vw] md:mb-5">
-            <h1 className="font-striger text-4xl text-white">Tasks</h1>
-          </section>
-          <div className="flex items-center justify-center w-full  px-8">
-            <section className="flex flex-col md:grid md:grid-cols-3 md:gap-8 w-full my-2 pb-2">
-              {domains.length > 0 &&
-                domains.map((domain, index) => (
+            <h1 className="font-striger text-4xl text-white">
+              Pending Results
+            </h1>
+            <div className="flex items-center justify-center w-full px-8">
+              <section className="flex flex-col md:grid md:grid-cols-3 md:gap-8 w-full my-2 pb-2">
+                {pendingResults.map((result, index) => (
                   <Taskcard
-                    domain={getMainDomain(domain.domain)}
-                    subDomain={domain.domain}
-                    completed={domain.hasSubmittedResponses}
+                    domain={getMainDomain(result.domain)}
+                    subDomain={result.domain}
+                    completed={false}
                     key={index}
                   />
                 ))}
-            </section>
-          </div>
+              </section>
+            </div>
+          </section>
+
+          <section className="flex flex-col w-full px-[5vw] md:mb-5">
+            <h1 className="font-striger text-4xl text-white">
+              Rejected Results
+            </h1>
+            <div className="flex items-center justify-center w-full px-8">
+              <section className="flex flex-col md:grid md:grid-cols-3 md:gap-8 w-full my-2 pb-2">
+                {rejectedResults.map((result, index) => (
+                  <Taskcard
+                    domain={getMainDomain(result.domain)}
+                    subDomain={result.domain}
+                    completed={true}
+                    key={index}
+                  />
+                ))}
+              </section>
+            </div>
+          </section>
         </div>
       ) : (
         <div className="flex flex-col justify-evenly items-center w-full min-h-screen pt-[15vh] font-striger text-3xl text-center md:text-5xl">
@@ -98,19 +145,7 @@ export default function Page() {
             }}
           />
         </div>
-      )} */}
-      <div className="flex flex-col items-center w-full min-h-screen pt-[15vh]">
-        <section className="flex flex-col font-striger text-center text-2xl md:text-4xl mb-[5vh] justify-around">
-          <h1 className="text-main-pink">Round 2 is over</h1>
-          <h1 className="text-white">The responses are being evaluated</h1>{" "}
-          <h1 className="text-white">
-            Join our{" "}
-            <a className="underline" href="https://discord.gg/vR7Q6rDAQB">
-              discord
-            </a>
-          </h1>
-        </section>
-      </div>
+      )}
     </>
   );
 }
