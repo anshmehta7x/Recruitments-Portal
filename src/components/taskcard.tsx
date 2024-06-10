@@ -31,18 +31,7 @@ export default function Taskcard(props: {
     return subDomain;
   };
   return (
-    <Link
-      href={
-        false
-          ? ""
-          : {
-              pathname: "/tasks",
-              query: {
-                domain: props.subDomain,
-              },
-            }
-      }
-    >
+    <Link href={false ? "" : ""}>
       <div className="py-3 px-5 h-[20vh] md:h-[25vh] md:w-[25vw] border-[#6117AB] bg-[rgba(82,36,129,0.3)] border-4 mx-3 rounded-2xl flex flex-col justify-between my-5 md:my-0">
         <div>
           <h1 className="font-sarpanch text-white font-bold underline text-xl">
@@ -61,7 +50,7 @@ export default function Taskcard(props: {
         >
           {/* {"Quiz will be updated soon"} */}
           {/*// Uncomment when quizzes are live*/}
-          {!props.completed ? "Pending" : "Edit"}
+          {!props.completed ? "Pending" : "Completed"}
         </label>
       </div>
     </Link>
