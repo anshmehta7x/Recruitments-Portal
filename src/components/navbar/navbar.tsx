@@ -87,18 +87,6 @@ export default function Nav() {
                     setIsShown={setIsShown}
                   />
                   <HamNavLink
-                    target="/events"
-                    text="Events Round-3"
-                    active={pathname === "/events"}
-                    setIsShown={setIsShown}
-                  />
-                  <HamNavLink
-                    target="/app"
-                    text="App Round-3"
-                    active={pathname === "/app"}
-                    setIsShown={setIsShown}
-                  />
-                  <HamNavLink
                     target="/profile"
                     text="Profile"
                     active={pathname === "/profile"}
