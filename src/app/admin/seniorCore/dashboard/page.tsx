@@ -3,8 +3,15 @@ import Loader from "@/components/loader";
 import Link from "next/link";
 import { Router } from "next/router";
 import { useEffect, useState } from "react";
-
-export default function AdminDashboard() {
+export default function AdminDashboard1() {
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <h1>Work is Done 👍</h1>
+    </div>
+  );
+}
+ function AdminDashboard() {
   const [show, setShow] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("email");
