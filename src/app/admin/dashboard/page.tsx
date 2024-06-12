@@ -45,11 +45,11 @@ export default function AdminDashboard() {
           </header>
           <main className="flex justify-center p-6">
             <div className="space-x-4">
-              <Link
-                href="/admin/responses"
+            <Link
+                href="/admin/round3responses"
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
               >
-                Responses
+                Round 3 Responses
               </Link>
               <Link
                 href="/admin/reports"
